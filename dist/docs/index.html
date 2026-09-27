@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation Overview &mdash; HERMES GSuite CLI</title>
+  <meta name="description" content="Official documentation for HERMES GSuite CLI — A Unified, AI-Powered Command-Line Interface for Google Workspace.">
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/docs.css">
+  <script src="../assets/js/config.js"></script>
+</head>
+<body>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="/" class="brand-link">
+        <img src="../assets/images/logo.png" alt="HERMES CLI Logo" class="brand-logo" width="36" height="36">
+        <span class="brand-name">HERMES GSUITE <span class="brand-badge">CLI</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="/docs" class="nav-link active">Documentation</a></li>
+          <li><a href="/security" class="nav-link">Security</a></li>
+          <li><a href="/privacy" class="nav-link">Privacy Policy</a></li>
+          <li><a href="/terms" class="nav-link">Terms</a></li>
+          <li><a href="/support" class="nav-link">Support</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="https://github.com/nsakthivel-dev/hermes-gsuite-cli" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" data-config="githubUrl">GitHub</a>
+        <a href="/docs/installation" class="btn btn-primary btn-sm">Get Started</a>
+        <button class="mobile-toggle" aria-label="Toggle Navigation">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container docs-layout">
+      <!-- Docs Sidebar -->
+      <aside class="docs-sidebar">
+        <div class="docs-nav-group">
+          <div class="docs-nav-title">Getting Started</div>
+          <ul class="docs-nav-list">
+            <li class="docs-nav-item active"><a href="/docs">Overview</a></li>
+            <li class="docs-nav-item"><a href="/docs/installation">Installation</a></li>
+            <li class="docs-nav-item"><a href="/docs/authentication">Authentication &amp; OAuth</a></li>
+          </ul>
+        </div>
+
+        <div class="docs-nav-group">
+          <div class="docs-nav-title">Command Reference</div>
+          <ul class="docs-nav-list">
+            <li class="docs-nav-item"><a href="/docs/commands">All Commands</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#gmail">Gmail</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#calendar">Calendar</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#sheets">Sheets</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#docs">Docs</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#meet">Meet</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#forms">Forms</a></li>
+          </ul>
+        </div>
+
+        <div class="docs-nav-group">
+          <div class="docs-nav-title">Advanced Features</div>
+          <ul class="docs-nav-list">
+            <li class="docs-nav-item"><a href="/docs/ai">AI &amp; Gemini Workflows</a></li>
+            <li class="docs-nav-item"><a href="/docs/caching">Local Disk Caching</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#output-formats">JSON / CSV Output</a></li>
+          </ul>
+        </div>
+
+        <div class="docs-nav-group">
+          <div class="docs-nav-title">Trust &amp; Legal</div>
+          <ul class="docs-nav-list">
+            <li class="docs-nav-item"><a href="/security">Security Model</a></li>
+            <li class="docs-nav-item"><a href="/privacy">Privacy Policy</a></li>
+            <li class="docs-nav-item"><a href="/terms">Terms of Service</a></li>
+            <li class="docs-nav-item"><a href="/support">Support &amp; Help</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Main Docs Content -->
+      <article class="docs-content">
+        <h1>HERMES GSuite CLI Documentation</h1>
+        <p>
+          Welcome to the official documentation for <strong>HERMES GSuite CLI</strong> &mdash; a unified, AI-powered command-line interface designed to bring Google Workspace operations into a terminal-first workflow.
+        </p>
+
+        <h2 id="architecture">Architecture Principles</h2>
+        <p>
+          HERMES GSuite CLI is built on a <strong>centrally distributed, locally authenticated, client-side open-source architecture</strong>:
+        </p>
+        <ul>
+          <li><strong>Client-Side Execution:</strong> HERMES runs entirely on your local machine. It connects directly to official Google Workspace APIs and the Google Gemini API. There are no intermediary proxy servers, third-party databases, or SaaS middlemen.</li>
+          <li><strong>Individual OAuth 2.0 Authorization:</strong> Each user authorizes their own Google account independently. HERMES never shares a central developer account or collects user passwords.</li>
+          <li><strong>Local User Isolation:</strong> Tokens (<code>~/.config/gsuite-cli/token.json</code>) and cache data (<code>~/.cache/gsuite-cli/</code>) are stored locally under your operating system user account.</li>
+          <li><strong>Deterministic Execution:</strong> Direct commands execute directly with Google APIs. AI processing is isolated exclusively to explicit AI commands.</li>
+        </ul>
+
+        <h2 id="quick-start">Quick Start</h2>
+        <p>Get up and running with HERMES in less than two minutes:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>bash</span><button class="copy-btn" data-copy="pip install hermes-cli">Copy</button></div>
+          <pre><code># 1. Install HERMES CLI from PyPI
+pip install hermes-cli
+
+# 2. Authenticate with your Google Account
+hermes auth login
+
+# 3. Check your calendar schedule
+hermes calendar today
+
+# 4. Triage your unread emails
+hermes gmail list --max-results 5</code></pre>
+        </div>
+
+        <h2 id="core-guides">Core Documentation Guides</h2>
+        <div class="grid-2" style="margin-top: 1.5rem;">
+          <a href="/docs/installation" class="card" style="text-decoration: none;">
+            <h3 class="card-title" style="color: var(--accent-emerald);">Installation Guide &rarr;</h3>
+            <p class="card-text">System requirements, Python compatibility (3.8 &ndash; 3.12), virtual environment configuration, and verification.</p>
+          </a>
+
+          <a href="/docs/authentication" class="card" style="text-decoration: none;">
+            <h3 class="card-title" style="color: var(--accent-cyan);">Authentication &amp; OAuth &rarr;</h3>
+            <p class="card-text">Step-by-step Google Cloud Console configuration, BYOC credentials, scope management, and token revocation.</p>
+          </a>
+
+          <a href="/docs/commands" class="card" style="text-decoration: none;">
+            <h3 class="card-title" style="color: #60a5fa;">Command Reference &rarr;</h3>
+            <p class="card-text">Full CLI syntax, subcommands, flags, and examples for Gmail, Calendar, Sheets, Docs, Meet, and Forms.</p>
+          </a>
+
+          <a href="/docs/ai" class="card" style="text-decoration: none;">
+            <h3 class="card-title" style="color: #a78bfa;">AI &amp; Gemini Integration &rarr;</h3>
+            <p class="card-text">Configuring Gemini API keys, prompt pipelines, email summarization, and data privacy boundaries.</p>
+          </a>
+        </div>
+
+        <h2 id="global-options">Global CLI Options</h2>
+        <p>The following global flags can be applied to any HERMES command:</p>
+
+        <div class="data-table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Flag</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>--config-dir &lt;path&gt;</code></td>
+                <td>Specify a custom directory for configuration and token storage instead of the default <code>~/.config/gsuite-cli/</code>.</td>
+              </tr>
+              <tr>
+                <td><code>--format [table|json|csv]</code></td>
+                <td>Set output formatting (default: <code>table</code>). Ideal for shell pipelines with <code>jq</code>.</td>
+              </tr>
+              <tr>
+                <td><code>--debug</code></td>
+                <td>Enable verbose debugging logs to inspect HTTP requests and API responses.</td>
+              </tr>
+              <tr>
+                <td><code>--version</code></td>
+                <td>Display the currently installed HERMES CLI version.</td>
+              </tr>
+              <tr>
+                <td><code>--help</code></td>
+                <td>Print built-in command documentation and available options.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <!-- Table of Contents -->
+      <aside class="docs-toc">
+        <div class="toc-title">On This Page</div>
+        <ul class="toc-list">
+          <li><a href="#architecture">Architecture Principles</a></li>
+          <li><a href="#quick-start">Quick Start</a></li>
+          <li><a href="#core-guides">Core Documentation</a></li>
+          <li><a href="#global-options">Global CLI Options</a></li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="brand-name">
+            <img src="../assets/images/logo.png" alt="" width="24" height="24" style="vertical-align: middle; margin-right: 6px;">
+            HERMES GSUITE <span class="brand-badge">CLI</span>
+          </div>
+          <p class="footer-desc">
+            Unified. Intelligent. Terminal-First.<br>
+            A Python-based command-line interface for Google Workspace.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Documentation</h4>
+          <ul class="footer-links">
+            <li><a href="/docs" class="footer-link">Docs Overview</a></li>
+            <li><a href="/docs/installation" class="footer-link">Installation</a></li>
+            <li><a href="/docs/authentication" class="footer-link">Authentication</a></li>
+            <li><a href="/docs/commands" class="footer-link">Commands Reference</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Trust &amp; Legal</h4>
+          <ul class="footer-links">
+            <li><a href="/privacy" class="footer-link">Privacy Policy</a></li>
+            <li><a href="/terms" class="footer-link">Terms of Service</a></li>
+            <li><a href="/security" class="footer-link">Security Overview</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Community</h4>
+          <ul class="footer-links">
+            <li><a href="/support" class="footer-link">Support &amp; Issues</a></li>
+            <li><a href="https://github.com/nsakthivel-dev/hermes-gsuite-cli" target="_blank" rel="noopener noreferrer" class="footer-link" data-config="githubUrl">GitHub Repository</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Contact</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:support@yourdomain.com" class="footer-link" data-config="supportEmail">Developer Support</a></li>
+            <li><a href="mailto:security@yourdomain.com" class="footer-link" data-config="securityEmail">Security Inquiries</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; <span data-config="copyrightYear">2026</span> HERMES GSuite CLI. Released under the MIT License.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/docs.js"></script>
+</body>
+</html>
+

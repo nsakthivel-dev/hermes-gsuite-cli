@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local Caching Architecture &mdash; HERMES GSuite CLI</title>
+  <meta name="description" content="Technical guide to the local disk caching system in HERMES CLI, TTL configuration, offline-ready operations, and cache management.">
+  <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/docs.css">
+  <script src="../../assets/js/config.js"></script>
+</head>
+<body>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="/" class="brand-link">
+        <img src="../../assets/images/logo.png" alt="HERMES CLI Logo" class="brand-logo" width="36" height="36">
+        <span class="brand-name">HERMES GSUITE <span class="brand-badge">CLI</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="/docs" class="nav-link active">Documentation</a></li>
+          <li><a href="/security" class="nav-link">Security</a></li>
+          <li><a href="/privacy" class="nav-link">Privacy Policy</a></li>
+          <li><a href="/terms" class="nav-link">Terms</a></li>
+          <li><a href="/support" class="nav-link">Support</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="https://github.com/nsakthivel-dev/hermes-gsuite-cli" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" data-config="githubUrl">GitHub</a>
+        <a href="/docs/installation" class="btn btn-primary btn-sm">Get Started</a>
+        <button class="mobile-toggle" aria-label="Toggle Navigation">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container docs-layout">
+      <!-- Docs Sidebar -->
+      <aside class="docs-sidebar">
+        <div class="docs-nav-group">
+          <div class="docs-nav-title">Getting Started</div>
+          <ul class="docs-nav-list">
+            <li class="docs-nav-item"><a href="/docs">Overview</a></li>
+            <li class="docs-nav-item"><a href="/docs/installation">Installation</a></li>
+            <li class="docs-nav-item"><a href="/docs/authentication">Authentication &amp; OAuth</a></li>
+          </ul>
+        </div>
+
+        <div class="docs-nav-group">
+          <div class="docs-nav-title">Command Reference</div>
+          <ul class="docs-nav-list">
+            <li class="docs-nav-item"><a href="/docs/commands">All Commands</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#gmail">Gmail</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#calendar">Calendar</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#sheets">Sheets</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#docs">Docs</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#meet">Meet</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#forms">Forms</a></li>
+          </ul>
+        </div>
+
+        <div class="docs-nav-group">
+          <div class="docs-nav-title">Advanced Features</div>
+          <ul class="docs-nav-list">
+            <li class="docs-nav-item"><a href="/docs/ai">AI &amp; Gemini Workflows</a></li>
+            <li class="docs-nav-item active"><a href="/docs/caching">Local Disk Caching</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Main Docs Content -->
+      <article class="docs-content">
+        <h1>Local Disk Caching Architecture</h1>
+        <p>
+          HERMES GSuite CLI includes a local, persistent disk caching system built on Python's <code>diskcache</code> library to deliver sub-millisecond response times for repeated queries, conserve Google API quotas, and enable offline-ready behavior for supported cached reads.
+        </p>
+
+        <h2 id="cache-directory">Storage Location &amp; Isolation</h2>
+        <p>
+          The cache is stored strictly on your local computer under your user home directory:
+        </p>
+        <ul>
+          <li><strong>Linux / macOS:</strong> <code>~/.cache/gsuite-cli/</code></li>
+          <li><strong>Windows:</strong> <code>C:\Users\&lt;username&gt;\.cache\gsuite-cli\</code></li>
+        </ul>
+        <p>
+          The cache uses an embedded, crash-safe SQLite index. Cache entries are isolated by operating system user permissions.
+        </p>
+
+        <h2 id="ttl-expiration">TTL-Based Invalidation</h2>
+        <p>
+          Each cached entry is tagged with a Time-To-Live (TTL). When you execute a query, HERMES checks if an active cache entry exists:
+        </p>
+        <ul>
+          <li><strong>Default TTL:</strong> 300 seconds (5 minutes).</li>
+          <li><strong>Cache Hit:</strong> Returns immediately without issuing a network request to Google APIs.</li>
+          <li><strong>Cache Miss or Expired TTL:</strong> Fetches live data from Google APIs, returns the response, and atomically updates the cache.</li>
+        </ul>
+
+        <h2 id="offline-behavior">Offline-Ready Behavior</h2>
+        <div class="callout callout-info">
+          <div class="callout-title">Accurate Offline Capabilities</div>
+          <p class="callout-text">
+            We do not claim &ldquo;fully offline Google Workspace access&rdquo; because mutating commands (sending emails, modifying spreadsheets, creating meetings) require active communication with Google's cloud servers. Rather, HERMES is <strong>offline-ready for supported cached operations</strong>: if you disconnect from Wi-Fi or experience network latency, previously cached reads and daily schedule summaries can still be viewed from your local terminal.
+          </p>
+        </div>
+
+        <h2 id="cache-commands">Cache Management Commands</h2>
+        <p>HERMES provides built-in commands to monitor and manage local cache state:</p>
+
+        <h3>Inspect Cache Statistics (<code>hermes cache stats</code>)</h3>
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>bash</span><button class="copy-btn" data-copy="hermes cache stats">Copy</button></div>
+          <pre><code>$ hermes cache stats
+Cache Directory: ~/.cache/gsuite-cli
+Total Size: 512.4 KB
+Stored Entries: 18
+Hit Count: 142
+Miss Count: 23
+Hit Ratio: 86.1%</code></pre>
+        </div>
+
+        <h3>Flush Local Cache (<code>hermes cache clear</code>)</h3>
+        <p>To immediately invalidate all cached responses and force fresh fetches from Google:</p>
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>bash</span><button class="copy-btn" data-copy="hermes cache clear">Copy</button></div>
+          <pre><code>$ hermes cache clear
+✔ Local cache database flushed successfully.</code></pre>
+        </div>
+      </article>
+
+      <aside class="docs-toc">
+        <div class="toc-title">On This Page</div>
+        <ul class="toc-list">
+          <li><a href="#cache-directory">Storage Location</a></li>
+          <li><a href="#ttl-expiration">TTL Invalidation</a></li>
+          <li><a href="#offline-behavior">Offline-Ready Behavior</a></li>
+          <li><a href="#cache-commands">Cache Commands</a></li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>&copy; <span data-config="copyrightYear">2026</span> HERMES GSuite CLI. Released under the MIT License.</div>
+        <div><a href="/privacy">Privacy Policy</a> &bull; <a href="/terms">Terms</a> &bull; <a href="/security">Security</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/main.js"></script>
+  <script src="../../assets/js/docs.js"></script>
+</body>
+</html>
+

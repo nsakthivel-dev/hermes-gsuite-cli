@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Installation Guide &mdash; HERMES GSuite CLI</title>
+  <meta name="description" content="Step-by-step installation instructions for HERMES GSuite CLI on Linux, macOS, and Windows with Python 3.8 - 3.12.">
+  <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/docs.css">
+  <script src="../../assets/js/config.js"></script>
+</head>
+<body>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="/" class="brand-link">
+        <img src="../../assets/images/logo.png" alt="HERMES CLI Logo" class="brand-logo" width="36" height="36">
+        <span class="brand-name">HERMES GSUITE <span class="brand-badge">CLI</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="/docs" class="nav-link active">Documentation</a></li>
+          <li><a href="/security" class="nav-link">Security</a></li>
+          <li><a href="/privacy" class="nav-link">Privacy Policy</a></li>
+          <li><a href="/terms" class="nav-link">Terms</a></li>
+          <li><a href="/support" class="nav-link">Support</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="https://github.com/nsakthivel-dev/hermes-gsuite-cli" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" data-config="githubUrl">GitHub</a>
+        <a href="/docs/installation" class="btn btn-primary btn-sm">Get Started</a>
+        <button class="mobile-toggle" aria-label="Toggle Navigation">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container docs-layout">
+      <!-- Docs Sidebar -->
+      <aside class="docs-sidebar">
+        <div class="docs-nav-group">
+          <div class="docs-nav-title">Getting Started</div>
+          <ul class="docs-nav-list">
+            <li class="docs-nav-item"><a href="/docs">Overview</a></li>
+            <li class="docs-nav-item active"><a href="/docs/installation">Installation</a></li>
+            <li class="docs-nav-item"><a href="/docs/authentication">Authentication &amp; OAuth</a></li>
+          </ul>
+        </div>
+
+        <div class="docs-nav-group">
+          <div class="docs-nav-title">Command Reference</div>
+          <ul class="docs-nav-list">
+            <li class="docs-nav-item"><a href="/docs/commands">All Commands</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#gmail">Gmail</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#calendar">Calendar</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#sheets">Sheets</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#docs">Docs</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#meet">Meet</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#forms">Forms</a></li>
+          </ul>
+        </div>
+
+        <div class="docs-nav-group">
+          <div class="docs-nav-title">Advanced Features</div>
+          <ul class="docs-nav-list">
+            <li class="docs-nav-item"><a href="/docs/ai">AI &amp; Gemini Workflows</a></li>
+            <li class="docs-nav-item"><a href="/docs/caching">Local Disk Caching</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Main Docs Content -->
+      <article class="docs-content">
+        <h1>Installation Guide</h1>
+        <p>
+          HERMES GSuite CLI is distributed as a lightweight, standard Python package published on PyPI. It runs locally without external daemon services.
+        </p>
+
+        <h2 id="requirements">System Requirements</h2>
+        <p>Before installing HERMES CLI, verify that your environment satisfies the prerequisites:</p>
+        <ul>
+          <li><strong>Operating System:</strong> Linux (Ubuntu, Debian, Fedora, Arch), macOS (11+), or Windows 10/11.</li>
+          <li><strong>Python Version:</strong> Python 3.8, 3.9, 3.10, 3.11, or 3.12.</li>
+          <li><strong>Network Access:</strong> Direct outgoing HTTPS (port 443) access to Google APIs (<code>*.googleapis.com</code>).</li>
+        </ul>
+
+        <h2 id="standard-install">Standard Installation via pip</h2>
+        <p>Install the package directly into your current Python environment:</p>
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>bash</span><button class="copy-btn" data-copy="pip install hermes-cli">Copy</button></div>
+          <pre><code>pip install hermes-cli</code></pre>
+        </div>
+
+        <h2 id="venv-install">Recommended: Isolated Virtual Environment</h2>
+        <p>We recommend creating an isolated virtual environment to prevent dependency conflicts with your system Python packages:</p>
+
+        <h3>Linux &amp; macOS</h3>
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>bash</span><button class="copy-btn" data-copy="python3 -m venv ~/.hermes-env && source ~/.hermes-env/bin/activate && pip install hermes-cli">Copy</button></div>
+          <pre><code># Create virtual environment
+python3 -m venv ~/.hermes-env
+
+# Activate virtual environment
+source ~/.hermes-env/bin/activate
+
+# Install HERMES CLI
+pip install hermes-cli</code></pre>
+        </div>
+
+        <h3>Windows (PowerShell)</h3>
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>powershell</span><button class="copy-btn" data-copy="python -m venv $HOME\.hermes-env; &amp; $HOME\.hermes-env\Scripts\Activate.ps1; pip install hermes-cli">Copy</button></div>
+          <pre><code># Create virtual environment
+python -m venv $HOME\.hermes-env
+
+# Activate virtual environment
+&amp; $HOME\.hermes-env\Scripts\Activate.ps1
+
+# Install HERMES CLI
+pip install hermes-cli</code></pre>
+        </div>
+
+        <h2 id="verifying-install">Verifying the Installation</h2>
+        <p>Verify that the binary is available in your shell's <code>PATH</code>:</p>
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>bash</span><button class="copy-btn" data-copy="hermes --version">Copy</button></div>
+          <pre><code>$ hermes --version
+hermes, version 0.1.0
+
+$ hermes --help</code></pre>
+        </div>
+
+        <h2 id="next-steps">Next Steps</h2>
+        <p>
+          Once installed, set up your Google OAuth credentials to connect your Google Workspace account:
+        </p>
+        <a href="/docs/authentication" class="btn btn-primary">Proceed to Authentication Guide &rarr;</a>
+      </article>
+
+      <aside class="docs-toc">
+        <div class="toc-title">On This Page</div>
+        <ul class="toc-list">
+          <li><a href="#requirements">System Requirements</a></li>
+          <li><a href="#standard-install">Standard Install</a></li>
+          <li><a href="#venv-install">Virtual Environment</a></li>
+          <li><a href="#verifying-install">Verifying Install</a></li>
+          <li><a href="#next-steps">Next Steps</a></li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>&copy; <span data-config="copyrightYear">2026</span> HERMES GSuite CLI. Released under the MIT License.</div>
+        <div><a href="/privacy">Privacy Policy</a> &bull; <a href="/terms">Terms</a> &bull; <a href="/security">Security</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/main.js"></script>
+  <script src="../../assets/js/docs.js"></script>
+</body>
+</html>
+

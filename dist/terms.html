@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service &mdash; HERMES GSuite CLI</title>
+  <meta name="description" content="Terms of Service for HERMES GSuite CLI, an open-source command-line interface for Google Workspace.">
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/docs.css">
+  <script src="../assets/js/config.js"></script>
+</head>
+<body>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="/" class="brand-link">
+        <img src="../assets/images/logo.png" alt="HERMES CLI Logo" class="brand-logo" width="36" height="36">
+        <span class="brand-name">HERMES GSUITE <span class="brand-badge">CLI</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="/docs" class="nav-link">Documentation</a></li>
+          <li><a href="/security" class="nav-link">Security</a></li>
+          <li><a href="/privacy" class="nav-link">Privacy Policy</a></li>
+          <li><a href="/terms" class="nav-link active">Terms</a></li>
+          <li><a href="/support" class="nav-link">Support</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="https://github.com/nsakthivel-dev/hermes-gsuite-cli" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" data-config="githubUrl">GitHub</a>
+        <a href="/docs/installation" class="btn btn-primary btn-sm">Get Started</a>
+        <button class="mobile-toggle" aria-label="Toggle Navigation">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container legal-layout">
+      <div class="meta-info-box">
+        <div class="meta-info-row">
+          <span class="meta-label">Software:</span>
+          <span class="meta-val"><strong>HERMES GSuite CLI</strong> (Open-Source Command-Line Tool)</span>
+        </div>
+        <div class="meta-info-row">
+          <span class="meta-label">License:</span>
+          <span class="meta-val">MIT Open Source License</span>
+        </div>
+        <div class="meta-info-row">
+          <span class="meta-label">Effective Date:</span>
+          <span class="meta-val">September 27, 2026</span>
+        </div>
+        <div class="meta-info-row">
+          <span class="meta-label">Support Contact:</span>
+          <span class="meta-val"><a href="mailto:support@yourdomain.com" data-config="supportEmail">support@yourdomain.com</a></span>
+        </div>
+      </div>
+
+      <article class="docs-content">
+        <h1>Terms of Service</h1>
+        <p>
+          These Terms of Service (&ldquo;Terms&rdquo;) govern your installation, access to, and use of <strong>HERMES GSuite CLI</strong> (&ldquo;HERMES&rdquo;, &ldquo;the software&rdquo;, or &ldquo;the CLI&rdquo;). By installing, downloading, or using HERMES CLI, you agree to be bound by these Terms.
+        </p>
+
+        <h2>1. Description of Software</h2>
+        <p>
+          HERMES GSuite CLI is a client-side, developer-focused command-line interface written in Python for managing Google Workspace services (such as Gmail, Calendar, Sheets, Docs, Meet, and Forms) directly from a local terminal. HERMES is provided as open-source software and is not a paid software-as-a-service (SaaS) or commercial subscription product.
+        </p>
+
+        <h2>2. Open Source License &amp; Copyright</h2>
+        <p>
+          HERMES GSuite CLI is licensed under the permissive <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer">MIT License</a>:
+        </p>
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>MIT License</span></div>
+          <pre><code>Copyright (c) 2026 HERMES CLI Contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</code></pre>
+        </div>
+
+        <h2>3. Acceptable Use</h2>
+        <p>
+          You agree to use HERMES CLI only in compliance with all applicable local, national, and international laws, regulations, and third-party terms. Specifically, you agree NOT to use HERMES CLI:
+        </p>
+        <ul>
+          <li>To transmit unsolicited commercial email (spam) or engage in email harassment via the Gmail API.</li>
+          <li>To deliberately violate Google's API rate limits or disrupt Google Workspace services.</li>
+          <li>To unlawfully access or exfiltrate accounts or resources belonging to other individuals without authorization.</li>
+          <li>For any malicious, fraudulent, or destructive activity.</li>
+        </ul>
+
+        <h2>4. User Responsibilities &amp; Local Security</h2>
+        <p>
+          Because HERMES GSuite CLI is a client-side tool operating on your local hardware:
+        </p>
+        <ul>
+          <li><strong>Protecting Your Environment:</strong> You are solely responsible for securing your operating system user account, terminal sessions, and the local files where tokens and credentials are saved (<code>~/.config/gsuite-cli/</code>).</li>
+          <li><strong>Protecting API Credentials:</strong> You are responsible for safeguarding your Google Cloud OAuth Client ID, Client Secret, and Gemini API keys. Do not commit your <code>token.json</code> or <code>credentials.json</code> to public version control repositories.</li>
+          <li><strong>Revoking Access:</strong> If your machine is lost, stolen, or compromised, you should immediately revoke HERMES' access token via Google Account Security (<a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer">myaccount.google.com/permissions</a>).</li>
+        </ul>
+
+        <h2>5. Relationship with Google Services</h2>
+        <p>
+          HERMES GSuite CLI is an independent open-source tool and is <strong>not endorsed, certified, or sponsored by Google LLC</strong>. Google Workspace, Gmail, Google Calendar, Google Drive, Google Sheets, Google Docs, Google Meet, and Google Forms are trademarks of Google LLC.
+        </p>
+        <p>
+          Your access to Google Workspace through HERMES is governed by your own direct agreements with Google, including the <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">Google Terms of Service</a> and the <a href="https://developers.google.com/terms" target="_blank" rel="noopener noreferrer">Google APIs Terms of Service</a>. You are responsible for ensuring that your usage complies with all applicable Google quotas and policies.
+        </p>
+
+        <h2>6. AI Feature Limitations (Google Gemini)</h2>
+        <p>
+          HERMES GSuite CLI provides optional integration with Google Gemini for natural-language workflows (email summarization, drafting, schedule inquiries). You acknowledge and agree that:
+        </p>
+        <ul>
+          <li>Artificial intelligence outputs are probabilistic and generative in nature. AI suggestions, summaries, or drafts may contain inaccuracies or hallucinations.</li>
+          <li>You are solely responsible for reviewing and verifying any AI-generated drafts, responses, or calendar alterations before sending or applying them.</li>
+          <li>The maintainers of HERMES CLI accept no liability for erroneous AI actions or content produced via third-party AI models.</li>
+        </ul>
+
+        <h2>7. Disclaimer of Warranties &amp; Limitation of Liability</h2>
+        <p>
+          THE SOFTWARE IS PROVIDED &ldquo;AS IS&rdquo; AND &ldquo;AS AVAILABLE&rdquo;, WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+        </p>
+        <p>
+          IN NO EVENT SHALL THE AUTHORS, MAINTAINERS, OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE, OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+        </p>
+
+        <h2>8. Modifications to Software and Terms</h2>
+        <p>
+          As an open-source software project, HERMES CLI may be modified, branched, updated, or discontinued at any time. We reserve the right to amend these Terms of Service by publishing an updated version on this website. Continued use of the software after changes are published constitutes your acceptance of the revised terms.
+        </p>
+
+        <h2>9. Contact Information</h2>
+        <p>
+          For legal inquiries, copyright notices, or questions regarding these Terms, please reach out to:
+        </p>
+        <ul>
+          <li><strong>Email:</strong> <a href="mailto:support@yourdomain.com" data-config="supportEmail">support@yourdomain.com</a></li>
+          <li><strong>Repository:</strong> <a href="https://github.com/nsakthivel-dev/hermes-gsuite-cli" target="_blank" rel="noopener noreferrer" data-config="githubUrl">github.com/nsakthivel-dev/hermes-gsuite-cli</a></li>
+        </ul>
+
+        <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle); display: flex; gap: 1.5rem; flex-wrap: wrap;">
+          <a href="/privacy">&larr; Privacy Policy</a>
+          <a href="/security">Security Practices &rarr;</a>
+          <a href="/docs">Documentation &rarr;</a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="brand-name">
+            <img src="../assets/images/logo.png" alt="" width="24" height="24" style="vertical-align: middle; margin-right: 6px;">
+            HERMES GSUITE <span class="brand-badge">CLI</span>
+          </div>
+          <p class="footer-desc">
+            Unified. Intelligent. Terminal-First.<br>
+            A Python-based command-line interface for Google Workspace.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Documentation</h4>
+          <ul class="footer-links">
+            <li><a href="/docs" class="footer-link">Docs Overview</a></li>
+            <li><a href="/docs/installation" class="footer-link">Installation</a></li>
+            <li><a href="/docs/authentication" class="footer-link">Authentication</a></li>
+            <li><a href="/docs/commands" class="footer-link">Commands Reference</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Trust &amp; Legal</h4>
+          <ul class="footer-links">
+            <li><a href="/privacy" class="footer-link">Privacy Policy</a></li>
+            <li><a href="/terms" class="footer-link">Terms of Service</a></li>
+            <li><a href="/security" class="footer-link">Security Overview</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Community</h4>
+          <ul class="footer-links">
+            <li><a href="/support" class="footer-link">Support &amp; Issues</a></li>
+            <li><a href="https://github.com/nsakthivel-dev/hermes-gsuite-cli" target="_blank" rel="noopener noreferrer" class="footer-link" data-config="githubUrl">GitHub Repository</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Contact</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:support@yourdomain.com" class="footer-link" data-config="supportEmail">Developer Support</a></li>
+            <li><a href="mailto:security@yourdomain.com" class="footer-link" data-config="securityEmail">Security Inquiries</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; <span data-config="copyrightYear">2026</span> HERMES GSuite CLI. Released under the MIT License.</div>
+        <div>Public Terms of Service for Google OAuth 2.0 verification.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
+

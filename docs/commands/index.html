@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Command Reference &mdash; HERMES GSuite CLI</title>
+  <meta name="description" content="Comprehensive CLI command reference for HERMES GSuite CLI covering Gmail, Calendar, Sheets, Docs, Meet, Forms, Cache, and output formats.">
+  <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/docs.css">
+  <script src="../../assets/js/config.js"></script>
+</head>
+<body>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="/" class="brand-link">
+        <img src="../../assets/images/logo.png" alt="HERMES CLI Logo" class="brand-logo" width="36" height="36">
+        <span class="brand-name">HERMES GSUITE <span class="brand-badge">CLI</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="/docs" class="nav-link active">Documentation</a></li>
+          <li><a href="/security" class="nav-link">Security</a></li>
+          <li><a href="/privacy" class="nav-link">Privacy Policy</a></li>
+          <li><a href="/terms" class="nav-link">Terms</a></li>
+          <li><a href="/support" class="nav-link">Support</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="https://github.com/nsakthivel-dev/hermes-gsuite-cli" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" data-config="githubUrl">GitHub</a>
+        <a href="/docs/installation" class="btn btn-primary btn-sm">Get Started</a>
+        <button class="mobile-toggle" aria-label="Toggle Navigation">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container docs-layout">
+      <!-- Docs Sidebar -->
+      <aside class="docs-sidebar">
+        <div class="docs-nav-group">
+          <div class="docs-nav-title">Getting Started</div>
+          <ul class="docs-nav-list">
+            <li class="docs-nav-item"><a href="/docs">Overview</a></li>
+            <li class="docs-nav-item"><a href="/docs/installation">Installation</a></li>
+            <li class="docs-nav-item"><a href="/docs/authentication">Authentication &amp; OAuth</a></li>
+          </ul>
+        </div>
+
+        <div class="docs-nav-group">
+          <div class="docs-nav-title">Command Reference</div>
+          <ul class="docs-nav-list">
+            <li class="docs-nav-item active"><a href="/docs/commands">All Commands</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#gmail">Gmail</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#calendar">Calendar</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#sheets">Sheets</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#docs">Docs</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#meet">Meet</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#forms">Forms</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#output-formats">Output Formats</a></li>
+          </ul>
+        </div>
+
+        <div class="docs-nav-group">
+          <div class="docs-nav-title">Advanced Features</div>
+          <ul class="docs-nav-list">
+            <li class="docs-nav-item"><a href="/docs/ai">AI &amp; Gemini Workflows</a></li>
+            <li class="docs-nav-item"><a href="/docs/caching">Local Disk Caching</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Main Docs Content -->
+      <article class="docs-content">
+        <h1>Command Reference</h1>
+        <p>
+          This document provides the complete command syntax, parameters, and examples for all supported Google Workspace services in HERMES CLI.
+        </p>
+
+        <!-- Gmail Commands -->
+        <h2 id="gmail">Gmail Service (<code>hermes gmail</code>)</h2>
+        <p>Read, compose, search, and manage email threads:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>Gmail Examples</span><button class="copy-btn" data-copy="hermes gmail list --max-results 10">Copy</button></div>
+          <pre><code># List recent messages from your inbox
+hermes gmail list --max-results 10
+
+# Search emails with Gmail query syntax
+hermes gmail search "has:attachment larger:5M"
+
+# Read a specific email message
+hermes gmail get &lt;MESSAGE_ID&gt;
+
+# Send a new email
+hermes gmail send --to "team@example.com" --subject "Release Plan" --body "Attached below."
+
+# Create a draft message without sending
+hermes gmail draft create --to "partner@example.com" --subject "Proposal" --body "Draft notes..."
+
+# Apply a label to an email thread
+hermes gmail label add &lt;MESSAGE_ID&gt; --label "Work/Priority"
+
+# Mark email as read or unread
+hermes gmail mark read &lt;MESSAGE_ID&gt;
+hermes gmail mark unread &lt;MESSAGE_ID&gt;</code></pre>
+        </div>
+
+        <!-- Calendar Commands -->
+        <h2 id="calendar">Google Calendar (<code>hermes calendar</code>)</h2>
+        <p>Manage calendars, view agendas, and schedule events:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>Calendar Examples</span><button class="copy-btn" data-copy="hermes calendar today">Copy</button></div>
+          <pre><code># Quick view of today's schedule
+hermes calendar today
+
+# View tomorrow's schedule
+hermes calendar tomorrow
+
+# View upcoming events for the next 7 days
+hermes calendar upcoming --days 7
+
+# List all user calendars
+hermes calendar list
+
+# Create a calendar event
+hermes calendar create-event \
+  --summary "Sprint Review" \
+  --start "2026-10-01 14:00" \
+  --duration 45 \
+  --attendees "dev1@example.com,dev2@example.com"
+
+# Delete a calendar event
+hermes calendar delete &lt;EVENT_ID&gt;
+
+# Query calendar availability by date range
+hermes calendar by-range --start "2026-10-01" --end "2026-10-05"</code></pre>
+        </div>
+
+        <!-- Sheets Commands -->
+        <h2 id="sheets">Google Sheets (<code>hermes sheets</code>)</h2>
+        <p>Read and manipulate spreadsheet tables directly:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>Sheets Examples</span><button class="copy-btn" data-copy="hermes sheets list">Copy</button></div>
+          <pre><code># List spreadsheets accessible to your account
+hermes sheets list
+
+# Read tabular range from a spreadsheet
+hermes sheets read &lt;SPREADSHEET_ID&gt; --range "Quarterly!A1:D20"
+
+# Append a row of values
+hermes sheets append &lt;SPREADSHEET_ID&gt; --range "Log!A:C" --values "2026-09-27,Deploy,Success"
+
+# Create a brand new spreadsheet in Google Drive
+hermes sheets create --title "Q4 Infrastructure Metrics"</code></pre>
+        </div>
+
+        <!-- Docs Commands -->
+        <h2 id="docs">Google Docs (<code>hermes docs</code>)</h2>
+        <p>Query document text structures and compose documents:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>Docs Examples</span><button class="copy-btn" data-copy="hermes docs list">Copy</button></div>
+          <pre><code># List accessible Google Docs documents
+hermes docs list
+
+# Read text contents of a document
+hermes docs read &lt;DOCUMENT_ID&gt;
+
+# Create a new document
+hermes docs create --title "Architecture Specification"
+
+# Append content to an existing document
+hermes docs append &lt;DOCUMENT_ID&gt; --text "Section 4: Threat Model Analysis"</code></pre>
+        </div>
+
+        <!-- Meet Commands -->
+        <h2 id="meet">Google Meet (<code>hermes meet</code>)</h2>
+        <p>Generate meeting spaces and conference links:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>Meet Examples</span><button class="copy-btn" data-copy="hermes meet create --topic 'Standup'">Copy</button></div>
+          <pre><code># Create a new instant Google Meet space
+hermes meet create --topic "Architecture Sync"
+# Output returns meeting URI (e.g., https://meet.google.com/abc-defg-hij)
+
+# List meeting spaces
+hermes meet list
+
+# Get meeting space details
+hermes meet get &lt;MEETING_SPACE_NAME&gt;</code></pre>
+        </div>
+
+        <!-- Forms Commands -->
+        <h2 id="forms">Google Forms (<code>hermes forms</code>)</h2>
+        <p>Inspect form questions and read respondent submissions:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>Forms Examples</span><button class="copy-btn" data-copy="hermes forms list">Copy</button></div>
+          <pre><code># List forms accessible to your account
+hermes forms list
+
+# Inspect form metadata and questions schema
+hermes forms get &lt;FORM_ID&gt;
+
+# Fetch respondent submissions
+hermes forms responses &lt;FORM_ID&gt; --format json</code></pre>
+        </div>
+
+        <!-- Output Formats -->
+        <h2 id="output-formats">Output Formats &amp; Scripting Integration</h2>
+        <p>
+          Format command outputs for terminal reading or automate pipelines using <code>--format</code>:
+        </p>
+
+        <h3>JSON Format with jq</h3>
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>bash</span><button class="copy-btn" data-copy="hermes calendar today --format json | jq '.[] | {summary: .summary, start: .start}'">Copy</button></div>
+          <pre><code>hermes calendar today --format json | jq '.[] | {summary: .summary, start: .start}'</code></pre>
+        </div>
+
+        <h3>CSV Format for File Export</h3>
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>bash</span><button class="copy-btn" data-copy="hermes sheets read <ID> --range 'A1:E50' --format csv > report.csv">Copy</button></div>
+          <pre><code>hermes sheets read &lt;SPREADSHEET_ID&gt; --range "A1:E50" --format csv &gt; report.csv</code></pre>
+        </div>
+      </article>
+
+      <aside class="docs-toc">
+        <div class="toc-title">On This Page</div>
+        <ul class="toc-list">
+          <li><a href="#gmail">Gmail</a></li>
+          <li><a href="#calendar">Calendar</a></li>
+          <li><a href="#sheets">Sheets</a></li>
+          <li><a href="#docs">Docs</a></li>
+          <li><a href="#meet">Meet</a></li>
+          <li><a href="#forms">Forms</a></li>
+          <li><a href="#output-formats">Output Formats</a></li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>&copy; <span data-config="copyrightYear">2026</span> HERMES GSuite CLI. Released under the MIT License.</div>
+        <div><a href="/privacy">Privacy Policy</a> &bull; <a href="/terms">Terms</a> &bull; <a href="/security">Security</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/main.js"></script>
+  <script src="../../assets/js/docs.js"></script>
+</body>
+</html>
+

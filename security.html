@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security Overview &mdash; HERMES GSuite CLI</title>
+  <meta name="description" content="Technical security model, OAuth 2.0 authorization, credential isolation, API communication, and responsible disclosure for HERMES GSuite CLI.">
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/docs.css">
+  <script src="../assets/js/config.js"></script>
+</head>
+<body>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="/" class="brand-link">
+        <img src="../assets/images/logo.png" alt="HERMES CLI Logo" class="brand-logo" width="36" height="36">
+        <span class="brand-name">HERMES GSUITE <span class="brand-badge">CLI</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="/docs" class="nav-link">Documentation</a></li>
+          <li><a href="/security" class="nav-link active">Security</a></li>
+          <li><a href="/privacy" class="nav-link">Privacy Policy</a></li>
+          <li><a href="/terms" class="nav-link">Terms</a></li>
+          <li><a href="/support" class="nav-link">Support</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="https://github.com/nsakthivel-dev/hermes-gsuite-cli" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" data-config="githubUrl">GitHub</a>
+        <a href="/docs/installation" class="btn btn-primary btn-sm">Get Started</a>
+        <button class="mobile-toggle" aria-label="Toggle Navigation">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container legal-layout">
+      <div class="meta-info-box">
+        <div class="meta-info-row">
+          <span class="meta-label">Application:</span>
+          <span class="meta-val"><strong>HERMES GSuite CLI</strong></span>
+        </div>
+        <div class="meta-info-row">
+          <span class="meta-label">Security Focus:</span>
+          <span class="meta-val">Local isolation, direct Google APIs, zero proxy architecture, minimal scoping</span>
+        </div>
+        <div class="meta-info-row">
+          <span class="meta-label">Security Email:</span>
+          <span class="meta-val"><a href="mailto:security@yourdomain.com" data-config="securityEmail">security@yourdomain.com</a></span>
+        </div>
+      </div>
+
+      <article class="docs-content">
+        <h1>HERMES GSuite CLI Security</h1>
+        <p>
+          This document describes the technical security architecture, credential handling, threat model boundaries, and operational practices of <strong>HERMES GSuite CLI</strong>.
+        </p>
+
+        <h2>1. OAuth 2.0 Authorization Model</h2>
+        <p>
+          HERMES GSuite CLI authenticates with Google APIs via the standard <strong>OAuth 2.0 for Installed/Desktop Applications</strong> framework (RFC 8252).
+        </p>
+        <ul>
+          <li><strong>No Password Ingestion:</strong> The CLI never receives, prompts for, or processes Google passwords or two-factor authentication secrets.</li>
+          <li><strong>Direct Token Grant:</strong> Authentication occurs exclusively through Google's authorization server (<code>accounts.google.com</code>). Tokens are issued directly to the user's local runtime.</li>
+          <li><strong>Delegated Permissions:</strong> Access is restricted strictly to the scopes agreed upon by the user during the initial authorization flow.</li>
+          <li><strong>Accurate Security Stance:</strong> OAuth 2.0 provides delegated access authorization. It does not eliminate all security risks; users must still maintain the security of their local workstation and the local token storage file.</li>
+        </ul>
+
+        <h2>2. Google Consent Screen</h2>
+        <p>
+          HERMES GSuite CLI adheres strictly to Google's consent screen requirements:
+        </p>
+        <ul>
+          <li>Authorization is triggered via an explicit local command (<code>hermes auth login</code>).</li>
+          <li>The user is redirected to Google's official consent interface in their web browser, where Google explicitly lists each requested permission (such as &ldquo;View and manage your Google Calendar&rdquo; or &ldquo;Read, compose, send, and permanently delete all your email from Gmail&rdquo;).</li>
+          <li>Users must actively verify and approve these permissions before any token is generated.</li>
+          <li>Users can selectively grant or withhold permissions, and HERMES validates whether the required scopes exist before attempting an API call.</li>
+        </ul>
+
+        <h2>3. Local Credential Handling &amp; Storage</h2>
+        <p>
+          HERMES GSuite CLI operates entirely client-side. There is no remote central database or multi-tenant server that aggregates user tokens:
+        </p>
+        <div class="data-table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Artifact</th>
+                <th>Storage Path</th>
+                <th>Access Restrictions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>OAuth Token (<code>token.json</code>)</strong></td>
+                <td><code>~/.config/gsuite-cli/token.json</code></td>
+                <td>Contains access token, refresh token, expiry, and scope list. Protected by OS user profile permissions.</td>
+              </tr>
+              <tr>
+                <td><strong>Client Secret (<code>credentials.json</code>)</strong></td>
+                <td><code>~/.config/gsuite-cli/credentials.json</code></td>
+                <td>OAuth 2.0 Desktop client configuration (Client ID &amp; Client Secret) or environment variable.</td>
+              </tr>
+              <tr>
+                <td><strong>Configuration (<code>config.yaml</code>)</strong></td>
+                <td><code>~/.config/gsuite-cli/config.yaml</code></td>
+                <td>CLI user preferences (output styles, default calendar, etc.).</td>
+              </tr>
+              <tr>
+                <td><strong>Local Disk Cache</strong></td>
+                <td><code>~/.cache/gsuite-cli/</code></td>
+                <td>Local SQLite/diskcache database of temporary cached API responses.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          On multi-user operating systems, tokens are isolated to the specific OS account running the command. If you wish to revoke tokens immediately, <code>hermes auth logout</code> revokes the active token online with Google and removes <code>token.json</code> from disk.
+        </p>
+
+        <h2>4. API Communication Security</h2>
+        <p>
+          All network communication initiated by HERMES GSuite CLI is encrypted in transit:
+        </p>
+        <ul>
+          <li><strong>Enforced HTTPS:</strong> All outgoing API calls use Transport Layer Security (TLS 1.2 or TLS 1.3) over port 443 directly to <code>*.googleapis.com</code> or <code>generativelanguage.googleapis.com</code>.</li>
+          <li><strong>No Intermediary Proxies:</strong> Requests travel directly from the user's terminal to Google's infrastructure. No traffic passes through third-party or maintainer-controlled relays.</li>
+          <li><strong>Certificate Validation:</strong> Standard certificate authority chains are verified using Python's standard <code>ssl</code> and <code>certifi</code> bundles.</li>
+        </ul>
+
+        <h2>5. Local Cache Architecture</h2>
+        <p>
+          To balance responsiveness with data freshness, HERMES CLI utilizes a local file-based cache powered by <code>diskcache</code>:
+        </p>
+        <ul>
+          <li><strong>Configurable Expiration:</strong> All cached reads are governed by a strict Time-to-Live (TTL), defaulting to 300 seconds (5 minutes).</li>
+          <li><strong>Hashed Indexing:</strong> Cache lookup keys are generated using MD5 hashes of command arguments, preventing query leakage in filenames.</li>
+          <li><strong>Local Purging:</strong> Users can run <code>hermes cache clear</code> at any time to immediately purge all cached data from the hard drive.</li>
+        </ul>
+
+        <h2>6. Data Minimization &amp; Direct Execution</h2>
+        <p>
+          HERMES GSuite CLI adheres to data minimization:
+        </p>
+        <ul>
+          <li><strong>No Passive Collection:</strong> The CLI only queries the specific Google Workspace resources requested by the active command (e.g. running <code>hermes calendar today</code> only requests events for today, not your entire multi-year calendar history).</li>
+          <li><strong>AI Isolation:</strong> Google Gemini AI is not executed on standard commands. When running <code>hermes gmail list</code>, no data is sent to Gemini. Only explicit AI subcommands (such as <code>hermes ai ask</code> or <code>hermes ai summarize</code>) send the requested prompt to Google's Gemini API endpoints.</li>
+        </ul>
+
+        <h2>7. Scope Management</h2>
+        <p>
+          HERMES CLI only requests scopes that are tied to implemented functionality. Scopes are requested at authorization time, and the CLI enforces pre-flight scope validation. If a user attempts to execute a command for which authorization was not granted, HERMES halts execution gracefully and notifies the user rather than failing silently or causing inconsistent state.
+        </p>
+
+        <h2>8. Security Reporting &amp; Vulnerability Disclosure</h2>
+        <p>
+          We welcome vulnerability disclosures and bug reports from the developer community and independent security researchers. If you identify a potential security issue or credential exposure vulnerability:
+        </p>
+        <div class="callout callout-warning">
+          <div class="callout-title">Responsible Disclosure Guidelines</div>
+          <p class="callout-text">
+            Please report suspected security vulnerabilities via email to <a href="mailto:security@yourdomain.com" data-config="securityEmail">security@yourdomain.com</a> rather than filing public GitHub issues. Please provide reproducible steps and technical details so we can investigate and address the issue promptly.
+          </p>
+        </div>
+
+        <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle); display: flex; gap: 1.5rem; flex-wrap: wrap;">
+          <a href="/privacy">&larr; Privacy Policy</a>
+          <a href="/terms">Terms of Service &rarr;</a>
+          <a href="/docs/authentication">Authentication Guide &rarr;</a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="brand-name">
+            <img src="../assets/images/logo.png" alt="" width="24" height="24" style="vertical-align: middle; margin-right: 6px;">
+            HERMES GSUITE <span class="brand-badge">CLI</span>
+          </div>
+          <p class="footer-desc">
+            Unified. Intelligent. Terminal-First.<br>
+            A Python-based command-line interface for Google Workspace.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Documentation</h4>
+          <ul class="footer-links">
+            <li><a href="/docs" class="footer-link">Docs Overview</a></li>
+            <li><a href="/docs/installation" class="footer-link">Installation</a></li>
+            <li><a href="/docs/authentication" class="footer-link">Authentication</a></li>
+            <li><a href="/docs/commands" class="footer-link">Commands Reference</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Trust &amp; Legal</h4>
+          <ul class="footer-links">
+            <li><a href="/privacy" class="footer-link">Privacy Policy</a></li>
+            <li><a href="/terms" class="footer-link">Terms of Service</a></li>
+            <li><a href="/security" class="footer-link">Security Overview</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Community</h4>
+          <ul class="footer-links">
+            <li><a href="/support" class="footer-link">Support &amp; Issues</a></li>
+            <li><a href="https://github.com/nsakthivel-dev/hermes-gsuite-cli" target="_blank" rel="noopener noreferrer" class="footer-link" data-config="githubUrl">GitHub Repository</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Contact</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:support@yourdomain.com" class="footer-link" data-config="supportEmail">Developer Support</a></li>
+            <li><a href="mailto:security@yourdomain.com" class="footer-link" data-config="securityEmail">Security Inquiries</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; <span data-config="copyrightYear">2026</span> HERMES GSuite CLI. Released under the MIT License.</div>
+        <div>Technical Security Documentation for Google OAuth 2.0 verification.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
+

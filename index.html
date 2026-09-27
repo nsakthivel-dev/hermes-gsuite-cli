@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HERMES GSuite CLI — Unified, AI-Powered Command-Line Interface for Google Workspace</title>
+  <meta name="description" content="HERMES GSuite CLI is an open-source, Python-based command-line interface for managing Google Workspace services directly from your terminal with local OAuth 2.0 authentication and Gemini AI automation.">
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/config.js"></script>
+</head>
+<body>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="/" class="brand-link">
+        <img src="assets/images/logo.png" alt="HERMES CLI Logo" class="brand-logo" width="36" height="36">
+        <span class="brand-name">HERMES GSUITE <span class="brand-badge">CLI</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="/docs" class="nav-link">Documentation</a></li>
+          <li><a href="/security" class="nav-link">Security</a></li>
+          <li><a href="/privacy" class="nav-link">Privacy Policy</a></li>
+          <li><a href="/terms" class="nav-link">Terms</a></li>
+          <li><a href="/support" class="nav-link">Support</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="https://github.com/nsakthivel-dev/hermes-gsuite-cli" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" data-config="githubUrl">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+          GitHub
+        </a>
+        <a href="/docs/installation" class="btn btn-primary btn-sm">Get Started</a>
+        <button class="mobile-toggle" aria-label="Toggle Navigation">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-badge-pill">
+          <span class="pulse-dot"></span>
+          Python-Based CLI &bull; Local OAuth 2.0 &bull; Direct Google APIs
+        </div>
+
+        <h1 class="hero-title">
+          HERMES GSUITE CLI<br>
+          <span class="gradient-text">One Terminal. Your Google Workspace.</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          An AI-powered command-line interface for managing Google Workspace services directly from your terminal.
+          Scriptable, fast, and authenticated locally with your own Google account.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="/docs/installation" class="btn btn-primary">Get Started</a>
+          <a href="/docs" class="btn btn-secondary">View Documentation</a>
+        </div>
+
+        <!-- Terminal Command Quick Copy -->
+        <div class="install-box-wrapper">
+          <div class="install-box">
+            <div class="install-cmd">
+              <span class="prompt-sym">$</span>
+              <span>pip install hermes-cli</span>
+            </div>
+            <button class="copy-btn" data-copy="pip install hermes-cli" title="Copy to clipboard">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span>Copy</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Terminal Preview Component -->
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span class="terminal-dot dot-red"></span>
+              <span class="terminal-dot dot-yellow"></span>
+              <span class="terminal-dot dot-green"></span>
+            </div>
+            <span class="terminal-title">hermes-cli &mdash; bash &mdash; 80x24</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">Terminal Preview</span>
+          </div>
+
+          <div class="terminal-tabs">
+            <button class="terminal-tab-btn active" data-tab="tab-gmail">Gmail</button>
+            <button class="terminal-tab-btn" data-tab="tab-calendar">Calendar</button>
+            <button class="terminal-tab-btn" data-tab="tab-sheets">Sheets</button>
+            <button class="terminal-tab-btn" data-tab="tab-docs">Docs</button>
+            <button class="terminal-tab-btn" data-tab="tab-ai">AI Automation</button>
+            <button class="terminal-tab-btn" data-tab="tab-auth">OAuth 2.0</button>
+          </div>
+
+          <div class="terminal-body">
+            <!-- Tab: Gmail -->
+            <div class="terminal-panel active" id="tab-gmail">
+              <div><span class="t-prompt">$ </span><span class="t-cmd">hermes gmail list</span> <span class="t-flag">--max-results</span> <span class="t-arg">3</span></div>
+              <div class="t-out">
+                <table class="t-table">
+                  <thead>
+                    <tr><th>ID</th><th>FROM</th><th>SUBJECT</th><th>DATE</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>18fb94a1</td><td>Alex Rivera</td><td>Q4 Workspace Architecture Review</td><td>Today 09:30</td></tr>
+                    <tr><td>18fb8f2c</td><td>Google Cloud</td><td>Billing Statement Ready for Inspection</td><td>Yesterday</td></tr>
+                    <tr><td>18fb7e05</td><td>DevOps Team</td><td>CI Pipeline Deployment Succeeded</td><td>Sep 25</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div><span class="t-prompt">$ </span><span class="t-cmd">hermes gmail send</span> <span class="t-flag">--to</span> <span class="t-arg">"lead@example.com"</span> <span class="t-flag">--subject</span> <span class="t-arg">"Deployment Confirmed"</span></div>
+              <div class="t-out" style="color: var(--accent-emerald);">✔ Email dispatched directly via Google Gmail API (Thread ID: 18fb9921)</div>
+            </div>
+
+            <!-- Tab: Calendar -->
+            <div class="terminal-panel" id="tab-calendar" style="display: none;">
+              <div><span class="t-prompt">$ </span><span class="t-cmd">hermes calendar today</span></div>
+              <div class="t-out">
+                <table class="t-table">
+                  <thead>
+                    <tr><th>TIME</th><th>SUMMARY</th><th>ATTENDEES</th><th>STATUS</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>10:00 - 10:30</td><td>Engineering Standup</td><td>6 participants</td><td>Confirmed</td></tr>
+                    <tr><td>14:00 - 15:00</td><td>API Security Architecture Review</td><td>security@, lead@</td><td>Accepted</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div><span class="t-prompt">$ </span><span class="t-cmd">hermes calendar create-event</span> <span class="t-flag">--summary</span> <span class="t-arg">"Sprint Retro"</span> <span class="t-flag">--start</span> <span class="t-arg">"2026-09-30 16:00"</span></div>
+              <div class="t-out" style="color: var(--accent-emerald);">✔ Event scheduled on primary calendar (Event ID: c8291410ab)</div>
+            </div>
+
+            <!-- Tab: Sheets -->
+            <div class="terminal-panel" id="tab-sheets" style="display: none;">
+              <div><span class="t-prompt">$ </span><span class="t-cmd">hermes sheets read</span> <span class="t-arg">1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs</span> <span class="t-flag">--range</span> <span class="t-arg">"Metrics!A1:C3"</span></div>
+              <div class="t-out">
+                <table class="t-table">
+                  <thead>
+                    <tr><th>METRIC</th><th>TARGET</th><th>ACTUAL</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>API Response Latency</td><td>&lt; 50ms</td><td>32ms</td></tr>
+                    <tr><td>Token Refresh Uptime</td><td>99.9%</td><td>100%</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Tab: Docs -->
+            <div class="terminal-panel" id="tab-docs" style="display: none;">
+              <div><span class="t-prompt">$ </span><span class="t-cmd">hermes docs list</span> <span class="t-flag">--page-size</span> <span class="t-arg">3</span></div>
+              <div class="t-out">
+                <table class="t-table">
+                  <thead>
+                    <tr><th>DOCUMENT ID</th><th>TITLE</th><th>LAST MODIFIED</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>1M7vE90kL...</td><td>OAuth Verification Architecture</td><td>Sep 26 18:20</td></tr>
+                    <tr><td>1Z4qW89mP...</td><td>CLI Development Roadmap 2026</td><td>Sep 24 11:15</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Tab: AI -->
+            <div class="terminal-panel" id="tab-ai" style="display: none;">
+              <div><span class="t-prompt">$ </span><span class="t-cmd">hermes ai ask</span> <span class="t-arg">"Summarize my unread emails from engineering today"</span></div>
+              <div class="t-out">
+                <span style="color: #60a5fa;">[Gemini 3.6 Flash Processing via direct generativelanguage.googleapis.com]</span><br>
+                &bull; 3 unread messages detected from alex@ and devops@.<br>
+                &bull; Core update: All tests pass for the v0.1.0 release.<br>
+                &bull; Action item: Review security disclosure draft before tomorrow morning.
+              </div>
+            </div>
+
+            <!-- Tab: Auth -->
+            <div class="terminal-panel" id="tab-auth" style="display: none;">
+              <div><span class="t-prompt">$ </span><span class="t-cmd">hermes auth status</span></div>
+              <div class="t-out">
+                OAuth Status: <span style="color: var(--accent-emerald);">Authenticated (Valid)</span><br>
+                Account: user@example.com<br>
+                Storage: ~/.config/gsuite-cli/token.json (Local Machine)<br>
+                Scopes Granted: gmail.modify, calendar, spreadsheets, documents, meet, forms, tasks<br>
+                Proxy Servers: None (Direct client connection)
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- What is HERMES? -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Overview</span>
+          <h2 class="section-title">What is HERMES?</h2>
+          <p class="section-desc">
+            HERMES GSuite CLI is a unified Python-based command-line interface designed to bring Google Workspace operations into a terminal-first workflow.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3 class="card-title">Eliminate Browser Context Switching</h3>
+            <p class="card-text">
+              Developers and terminal power users spend considerable time context-switching between code editors, shell sessions, and multiple Google Workspace browser tabs. HERMES GSuite CLI connects directly to official Google Workspace APIs so you can triage mail, inspect calendar availability, read spreadsheets, and check meeting agendas without leaving your command-line environment.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Scriptable, Automation-Ready Output</h3>
+            <p class="card-text">
+              Every HERMES command natively supports human-friendly formatted terminal tables, raw machine-readable JSON, and CSV output. This makes HERMES suitable for shell pipelines with <code>jq</code>, cron jobs, custom bash scripts, developer workflows, and local automation without spinning up cumbersome web frameworks.
+            </p>
+          </div>
+        </div>
+
+        <div class="callout callout-info" style="margin-top: 2rem;">
+          <div class="callout-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            Command-Line Application Notice
+          </div>
+          <p class="callout-text">
+            HERMES is strictly a local command-line interface (CLI) published via PyPI. This website is the official public product information, privacy policy, security documentation, and verification site required for Google OAuth 2.0 app identity. This site is not a browser-based SaaS dashboard or web client.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Google Workspace Services Supported -->
+    <section class="section" id="services" style="background: rgba(12, 16, 23, 0.5);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Capabilities</span>
+          <h2 class="section-title">Supported Google Workspace Services</h2>
+          <p class="section-desc">
+            HERMES interacts exclusively with supported, official Google Workspace endpoints through authorized user permissions.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <!-- Gmail -->
+          <div class="card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </div>
+            <h3 class="card-title">Gmail</h3>
+            <p class="card-text">Direct terminal email management via official Google Gmail API.</p>
+            <ul class="card-list">
+              <li>Read, list, and search inbox messages</li>
+              <li>Send emails and create drafts</li>
+              <li>Apply labels, mark read/unread</li>
+              <li>Summarize email threads via AI integration</li>
+            </ul>
+          </div>
+
+          <!-- Calendar -->
+          <div class="card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+            </div>
+            <h3 class="card-title">Calendar</h3>
+            <p class="card-text">View and manage schedules, agendas, and appointments.</p>
+            <ul class="card-list">
+              <li>Inspect today, tomorrow, and upcoming events</li>
+              <li>Create, update, and delete calendar events</li>
+              <li>Query free/busy slots and scheduling conflicts</li>
+              <li>Smart natural-language event creation</li>
+            </ul>
+          </div>
+
+          <!-- Sheets -->
+          <div class="card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="3" y1="9" x2="21" y2="9"></line>
+                <line x1="3" y1="15" x2="21" y2="15"></line>
+                <line x1="9" y1="3" x2="9" y2="21"></line>
+                <line x1="15" y1="3" x2="15" y2="21"></line>
+              </svg>
+            </div>
+            <h3 class="card-title">Sheets</h3>
+            <p class="card-text">Fast spreadsheet data reading and manipulation from terminal.</p>
+            <ul class="card-list">
+              <li>List accessible spreadsheets</li>
+              <li>Read cell ranges with formatted output</li>
+              <li>Append rows and update table values</li>
+              <li>Export data ranges directly to CSV / JSON</li>
+            </ul>
+          </div>
+
+          <!-- Docs -->
+          <div class="card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+            </div>
+            <h3 class="card-title">Docs</h3>
+            <p class="card-text">Interact with Google Docs content cleanly and directly.</p>
+            <ul class="card-list">
+              <li>List documents in Drive</li>
+              <li>Extract raw text and document structures</li>
+              <li>Create new documents from the terminal</li>
+              <li>Append text, headings, and batch updates</li>
+            </ul>
+          </div>
+
+          <!-- Meet -->
+          <div class="card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+              </svg>
+            </div>
+            <h3 class="card-title">Meet</h3>
+            <p class="card-text">Supported Google Meet space generation and conference links.</p>
+            <ul class="card-list">
+              <li>Create instant Google Meet spaces</li>
+              <li>Retrieve meeting conference links and IDs</li>
+              <li>Inspect meeting configurations</li>
+              <li>Attach meeting spaces to Calendar events</li>
+            </ul>
+          </div>
+
+          <!-- Forms -->
+          <div class="card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 11l3 3L22 4"></path>
+                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+              </svg>
+            </div>
+            <h3 class="card-title">Forms</h3>
+            <p class="card-text">Query Google Forms data and inspect respondent submissions.</p>
+            <ul class="card-list">
+              <li>List accessible Google Forms</li>
+              <li>Retrieve form metadata and question schemas</li>
+              <li>Fetch respondent submissions and answers</li>
+              <li>Export form responses to JSON for data processing</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Secure OAuth 2.0 Explanation -->
+    <section class="section" id="oauth">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Security &amp; Authorization</span>
+          <h2 class="section-title">Secure Google Authorization</h2>
+          <p class="section-desc">
+            HERMES uses OAuth 2.0 to allow users to authorize access to their own Google Workspace data without providing their Google password to HERMES.
+          </p>
+        </div>
+
+        <!-- Visual Flow Diagram -->
+        <div class="flow-diagram">
+          <div class="flow-steps">
+            <div class="flow-node">
+              <div class="flow-node-title">1. User</div>
+              <div class="flow-node-desc">Runs <code>hermes auth login</code></div>
+            </div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-node">
+              <div class="flow-node-title">2. HERMES CLI</div>
+              <div class="flow-node-desc">Starts local loopback flow</div>
+            </div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-node active-node">
+              <div class="flow-node-title">3. Google OAuth 2.0</div>
+              <div class="flow-node-desc">Google Consent Screen in browser</div>
+            </div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-node">
+              <div class="flow-node-title">4. User Grants Permission</div>
+              <div class="flow-node-desc">Explicit consent per scope</div>
+            </div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-node">
+              <div class="flow-node-title">5. Local Token Saved</div>
+              <div class="flow-node-desc">Saved to <code>~/.config/gsuite-cli/token.json</code></div>
+            </div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-node">
+              <div class="flow-node-title">6. Direct Google APIs</div>
+              <div class="flow-node-desc">Requests authenticated directly with Google</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 2rem;">
+          <div>
+            <h3 style="margin-bottom: 0.75rem;">Authorization Without Passwords</h3>
+            <p>
+              When you initialize HERMES CLI, it initiates Google's standard OAuth 2.0 Installed/Desktop Application flow. Authentication occurs exclusively through Google's official accounts system (<code>accounts.google.com</code>). HERMES never sees, asks for, or stores your Google account password.
+            </p>
+            <p style="margin-top: 0.75rem;">
+              You explicitly review and grant permission on Google's consent screen. Google controls the authorization grant, and you can revoke HERMES' access at any time through your Google Account Security dashboard or via the <code>hermes auth logout</code> command.
+            </p>
+          </div>
+          <div>
+            <h3 style="margin-bottom: 0.75rem;">Authorization Mechanism, Not an Exaggeration</h3>
+            <p>
+              OAuth 2.0 is an industry-standard authorization framework that enables delegated access. We do not claim that OAuth 2.0 automatically makes an application immune to security issues; rather, it ensures that your credentials remain with Google and that access tokens are scoped only to the services you explicitly permit.
+            </p>
+            <p style="margin-top: 0.75rem;">
+              Tokens and credentials are held locally under your operating system user account. Read our full <a href="/security">Security Documentation</a> for comprehensive technical details.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Data Access Transparency -->
+    <section class="section" id="data-access" style="background: rgba(12, 16, 23, 0.5);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Transparency</span>
+          <h2 class="section-title">What Data Does HERMES Access?</h2>
+          <p class="section-desc">
+            HERMES only requests the Google permissions required by the application's implemented functionality.
+          </p>
+        </div>
+
+        <p style="text-align: center; max-width: 780px; margin: -1.5rem auto 2.5rem auto;">
+          Access to your data is strictly conditional on the specific commands you execute and the OAuth scopes you explicitly grant during the Google consent prompt.
+        </p>
+
+        <div class="data-table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th>OAuth Scopes Requested</th>
+                <th>Why It Is Required</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Gmail</strong></td>
+                <td>
+                  <code>https://www.googleapis.com/auth/gmail.modify</code><br>
+                  <code>https://www.googleapis.com/auth/gmail.settings.basic</code>
+                </td>
+                <td>Allows reading messages, composing emails, labeling, and marking emails according to user commands.</td>
+              </tr>
+              <tr>
+                <td><strong>Calendar</strong></td>
+                <td><code>https://www.googleapis.com/auth/calendar</code></td>
+                <td>Allows listing, viewing, scheduling, updating, and removing calendar events requested by user commands.</td>
+              </tr>
+              <tr>
+                <td><strong>Sheets</strong></td>
+                <td>
+                  <code>https://www.googleapis.com/auth/spreadsheets</code><br>
+                  <code>https://www.googleapis.com/auth/drive.file</code>
+                </td>
+                <td>Allows reading and writing tabular spreadsheet ranges and creating spreadsheets in Google Drive.</td>
+              </tr>
+              <tr>
+                <td><strong>Docs</strong></td>
+                <td>
+                  <code>https://www.googleapis.com/auth/documents</code><br>
+                  <code>https://www.googleapis.com/auth/drive</code>
+                </td>
+                <td>Allows reading document structure and content, creating documents, and applying text batch updates.</td>
+              </tr>
+              <tr>
+                <td><strong>Meet</strong></td>
+                <td>
+                  <code>https://www.googleapis.com/auth/meetings.space.created</code><br>
+                  <code>https://www.googleapis.com/auth/meetings.space.readonly</code>
+                </td>
+                <td>Allows creating instant Google Meet meeting spaces and retrieving conference join links.</td>
+              </tr>
+              <tr>
+                <td><strong>Forms</strong></td>
+                <td>
+                  <code>https://www.googleapis.com/auth/forms.body</code><br>
+                  <code>https://www.googleapis.com/auth/forms.responses.readonly</code>
+                </td>
+                <td>Allows inspecting form metadata and fetching respondent submissions when requested by the user.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout" style="margin-top: 1.5rem;">
+          <div class="callout-title">Principle of Least Privilege</div>
+          <p class="callout-text">
+            HERMES does not request arbitrary scopes or broad administrative access unless specifically needed for implemented features. Furthermore, HERMES supports granular scope authentication if you only wish to authenticate specific services.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Local Credential Handling -->
+    <section class="section" id="credentials">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Architecture</span>
+          <h2 class="section-title">Your Google Account, Your Authorization</h2>
+          <p class="section-desc">
+            HERMES is built with a decentralized, client-side credential architecture. Each user authorizes their own account.
+          </p>
+        </div>
+
+        <div class="flow-diagram">
+          <div class="flow-steps" style="justify-content: center; gap: 2rem;">
+            <div class="flow-node">
+              <div class="flow-node-title">User's Google Account</div>
+              <div class="flow-node-desc">Individual account &amp; permissions</div>
+            </div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-node">
+              <div class="flow-node-title">Official Google OAuth</div>
+              <div class="flow-node-desc">Direct token issuance</div>
+            </div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-node">
+              <div class="flow-node-title">HERMES CLI (Local)</div>
+              <div class="flow-node-desc">Direct API communication</div>
+            </div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-node active-node">
+              <div class="flow-node-title">Local Storage</div>
+              <div class="flow-node-desc"><code>~/.config/gsuite-cli/token.json</code></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-3" style="margin-top: 2rem;">
+          <div class="card">
+            <h4 class="card-title">User-Isolated Credentials</h4>
+            <p class="card-text">
+              Each user authorizes their own Google account independently. HERMES does not share one developer's Google account or central token pool across users. Tokens are stored exclusively in your local user directory:
+            </p>
+            <code style="display: block; margin-top: 0.5rem; font-size: 0.8rem; color: var(--accent-emerald);">
+              Linux/macOS: ~/.config/gsuite-cli/token.json<br>
+              Windows: %USERPROFILE%\.config\gsuite-cli\token.json
+            </code>
+          </div>
+
+          <div class="card">
+            <h4 class="card-title">No Intermediary Backend Proxy</h4>
+            <p class="card-text">
+              Unlike web SaaS services, HERMES does not require a central server to proxy your Google API requests. Your CLI communicates directly over HTTPS with Google's servers (<code>googleapis.com</code>).
+            </p>
+          </div>
+
+          <div class="card">
+            <h4 class="card-title">Technically Accurate Privacy</h4>
+            <p class="card-text">
+              We do not make inaccurate marketing claims like "zero data leaves your computer," because Google API requests necessarily transmit command parameters and data to Google's cloud servers to perform operations. What we guarantee is that no data is routed through third-party servers operated by the HERMES project.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI / Gemini Section -->
+    <section class="section" id="ai" style="background: rgba(12, 16, 23, 0.5);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">AI Integration</span>
+          <h2 class="section-title">AI-Powered Workspace Interaction</h2>
+          <p class="section-desc">
+            HERMES integrates Google Gemini for supported natural-language workflows while keeping direct commands purely deterministic.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <h3 style="margin-bottom: 0.85rem;">Clear Separation: Direct vs. AI Execution</h3>
+            <p>
+              A critical aspect of HERMES' design is that <strong>not every command is sent to Gemini</strong>. When you run standard commands such as <code>hermes calendar list</code> or <code>hermes sheets read</code>, HERMES executes a direct, deterministic call to the Google Workspace API. No AI processing occurs, and no data is transmitted to Gemini.
+            </p>
+            <p style="margin-top: 0.75rem;">
+              Gemini is only invoked when you explicitly execute an AI command (such as <code>hermes ai ask</code>, <code>hermes ai summarize</code>, or <code>hermes calendar smart-create</code>) using your own Gemini API key.
+            </p>
+            <ul class="card-list" style="margin-top: 1rem;">
+              <li>Natural-language request interpretation</li>
+              <li>Email summarization and draft assistance</li>
+              <li>Natural-language calendar scheduling</li>
+              <li>Workspace data insights and summaries</li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="flow-diagram" style="padding: 1.5rem; margin-top: 0;">
+              <h4 style="color: #ffffff; margin-bottom: 1rem; font-size: 0.95rem;">Command Processing Pipeline</h4>
+              <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                <div class="flow-node" style="text-align: left; padding: 0.75rem 1rem;">
+                  <strong>1. User Command Input:</strong> e.g., <code>hermes ai ask "..."</code> vs <code>hermes gmail list</code>
+                </div>
+                <div class="flow-node" style="text-align: left; padding: 0.75rem 1rem;">
+                  <strong>2. Command Processor:</strong> Checks if AI flag or <code>ai</code> subcommand is invoked
+                </div>
+                <div class="flow-node" style="text-align: left; padding: 0.75rem 1rem; border-color: var(--accent-cyan);">
+                  <strong>3. Deterministic Routing:</strong>
+                  <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.35rem;">
+                    &bull; Direct Command &rarr; Calls Google API directly (no AI)<br>
+                    &bull; AI Command &rarr; Sends prompt to Gemini API with user's key
+                  </div>
+                </div>
+                <div class="flow-node" style="text-align: left; padding: 0.75rem 1rem;">
+                  <strong>4. Output Display:</strong> Formatted table, JSON, or text returned to terminal
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Local Caching Section -->
+    <section class="section" id="caching">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Performance</span>
+          <h2 class="section-title">Local Cache for Faster Workspace Operations</h2>
+          <p class="section-desc">
+            HERMES utilizes a local disk cache to accelerate repeated operations and reduce redundant network requests.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <h4 class="card-title">TTL-Based Expiration</h4>
+            <p class="card-text">
+              Cached responses are governed by configurable Time-To-Live (default: 300 seconds / 5 minutes). Cached entries expire automatically, ensuring data remains fresh without manual intervention.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4 class="card-title">Reduced API Quota Usage</h4>
+            <p class="card-text">
+              Repeated queries within the TTL window are served directly from your local SQLite-backed disk cache (<code>~/.cache/gsuite-cli/</code>), lowering Google API quota consumption and providing near-instant responses.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4 class="card-title">Offline-Ready for Supported Reads</h4>
+            <p class="card-text">
+              We do not claim "fully offline Google Workspace access." However, HERMES is <em>offline-ready for supported cached operations</em>, allowing previously cached reads and calendar summaries to be viewed even during transient network drops.
+            </p>
+          </div>
+        </div>
+
+        <div class="code-block-wrapper" style="margin-top: 2rem;">
+          <div class="code-block-header">
+            <span>Cache Management Commands</span>
+            <span>CLI</span>
+          </div>
+          <pre><code><span class="t-prompt">$ </span><span class="t-cmd">hermes cache stats</span>
+Cache Directory: ~/.cache/gsuite-cli
+Total Size: 428 KB | Entries: 14 | Hit Ratio: 86.4%
+
+<span class="t-prompt">$ </span><span class="t-cmd">hermes cache clear</span>
+✔ Local cache flushed successfully</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Developer Experience Section -->
+    <section class="section" id="developer-experience" style="background: rgba(12, 16, 23, 0.5);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Developer Experience</span>
+          <h2 class="section-title">Built for Shell Scripts &amp; Terminal Workflows</h2>
+          <p class="section-desc">
+            Engineered with consistency, machine-readable output formats, and shell integration from day one.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <h4 class="card-title">Multiple Output Formats</h4>
+            <p class="card-text">
+              Every listing command accepts <code>--format table</code> (default), <code>--format json</code>, or <code>--format csv</code>. Easily pipe structured data into <code>jq</code>, <code>awk</code>, or external tools.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4 class="card-title">Automation &amp; CI/CD Ready</h4>
+            <p class="card-text">
+              Automate report generation, calendar notifications, or inbox triage in headless environments using environment-injected OAuth credentials (<code>HERMES_GOOGLE_CLIENT_SECRET</code>).
+            </p>
+          </div>
+
+          <div class="card">
+            <h4 class="card-title">Non-Interactive Mode</h4>
+            <p class="card-text">
+              Deterministic command arguments, standardized POSIX exit codes, and automated credential refresh make HERMES reliable for unattended cron jobs and scripts.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Installation Section -->
+    <section class="section" id="installation">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Getting Started</span>
+          <h2 class="section-title">Install &amp; Authenticate in 3 Simple Steps</h2>
+          <p class="section-desc">
+            No web server to deploy. Install via pip, connect your Google account, and start working.
+          </p>
+        </div>
+
+        <div class="step-list" style="max-width: 820px; margin: 0 auto;">
+          <!-- Step 1 -->
+          <div class="step-item">
+            <div class="step-num">01</div>
+            <div class="step-content">
+              <h3 class="step-title">Install HERMES CLI</h3>
+              <p>Install the official package from PyPI into your active Python environment (Python 3.8 &ndash; 3.12 supported):</p>
+              <div class="code-block-wrapper" style="margin: 0.75rem 0;">
+                <div class="code-block-header">
+                  <span>bash</span>
+                  <button class="copy-btn" data-copy="pip install hermes-cli">Copy</button>
+                </div>
+                <pre><code>pip install hermes-cli</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="step-item">
+            <div class="step-num">02</div>
+            <div class="step-content">
+              <h3 class="step-title">Authenticate with Google</h3>
+              <p>
+                Provide your Google Cloud Desktop OAuth client credentials (see our <a href="/docs/authentication">OAuth Setup Guide</a>) and run:
+              </p>
+              <div class="code-block-wrapper" style="margin: 0.75rem 0;">
+                <div class="code-block-header">
+                  <span>bash</span>
+                  <button class="copy-btn" data-copy="hermes auth login">Copy</button>
+                </div>
+                <pre><code>hermes auth login</code></pre>
+              </div>
+              <p style="font-size: 0.9rem; color: var(--text-muted);">
+                A browser tab opens to the official Google consent screen where you grant permission to your account.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="step-item">
+            <div class="step-num">03</div>
+            <div class="step-content">
+              <h3 class="step-title">Start Using Workspace Commands</h3>
+              <p>Explore all available operations directly through the integrated help system:</p>
+              <div class="code-block-wrapper" style="margin: 0.75rem 0;">
+                <div class="code-block-header">
+                  <span>bash</span>
+                  <button class="copy-btn" data-copy="hermes --help">Copy</button>
+                </div>
+                <pre><code>hermes --help
+hermes calendar today
+hermes gmail list</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 3.5rem;">
+          <a href="/docs" class="btn btn-primary">Read Complete Documentation</a>
+          <a href="/security" class="btn btn-secondary" style="margin-left: 1rem;">View Security Practices</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="brand-name">
+            <img src="assets/images/logo.png" alt="" width="24" height="24" style="vertical-align: middle; margin-right: 6px;">
+            HERMES GSUITE <span class="brand-badge">CLI</span>
+          </div>
+          <p class="footer-desc">
+            Unified. Intelligent. Terminal-First.<br>
+            A Python-based command-line interface for Google Workspace.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Documentation</h4>
+          <ul class="footer-links">
+            <li><a href="/docs" class="footer-link">Docs Overview</a></li>
+            <li><a href="/docs/installation" class="footer-link">Installation</a></li>
+            <li><a href="/docs/authentication" class="footer-link">Authentication</a></li>
+            <li><a href="/docs/commands" class="footer-link">Commands Reference</a></li>
+            <li><a href="/docs/ai" class="footer-link">AI &amp; Gemini</a></li>
+            <li><a href="/docs/caching" class="footer-link">Local Caching</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Trust &amp; Legal</h4>
+          <ul class="footer-links">
+            <li><a href="/privacy" class="footer-link">Privacy Policy</a></li>
+            <li><a href="/terms" class="footer-link">Terms of Service</a></li>
+            <li><a href="/security" class="footer-link">Security Overview</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Community</h4>
+          <ul class="footer-links">
+            <li><a href="/support" class="footer-link">Support &amp; Issues</a></li>
+            <li><a href="https://github.com/nsakthivel-dev/hermes-gsuite-cli" target="_blank" rel="noopener noreferrer" class="footer-link" data-config="githubUrl">GitHub Repository</a></li>
+            <li><a href="https://pypi.org/project/hermes-cli/" target="_blank" rel="noopener noreferrer" class="footer-link" data-config="pypiUrl">PyPI Package</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Contact</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:support@yourdomain.com" class="footer-link" data-config="supportEmail">Developer Support</a></li>
+            <li><a href="mailto:security@yourdomain.com" class="footer-link" data-config="securityEmail">Security Inquiries</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; <span data-config="copyrightYear">2026</span> HERMES GSuite CLI. Released under the <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer">MIT License</a>.
+        </div>
+        <div>
+          Google Workspace, Gmail, Google Calendar, Google Drive, Google Sheets, Google Docs, Google Meet, and Google Forms are trademarks of Google LLC. HERMES GSuite CLI is an independent open-source tool.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
+

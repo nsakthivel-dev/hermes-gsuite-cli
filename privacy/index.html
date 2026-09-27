@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy &mdash; HERMES GSuite CLI</title>
+  <meta name="description" content="Official Privacy Policy for HERMES GSuite CLI explaining Google user data access, OAuth 2.0 authorization, local token storage, Gemini AI integration, data retention, and user rights.">
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/docs.css">
+  <script src="../assets/js/config.js"></script>
+</head>
+<body>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="/" class="brand-link">
+        <img src="../assets/images/logo.png" alt="HERMES CLI Logo" class="brand-logo" width="36" height="36">
+        <span class="brand-name">HERMES GSUITE <span class="brand-badge">CLI</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="/docs" class="nav-link">Documentation</a></li>
+          <li><a href="/security" class="nav-link">Security</a></li>
+          <li><a href="/privacy" class="nav-link active">Privacy Policy</a></li>
+          <li><a href="/terms" class="nav-link">Terms</a></li>
+          <li><a href="/support" class="nav-link">Support</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="https://github.com/nsakthivel-dev/hermes-gsuite-cli" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" data-config="githubUrl">GitHub</a>
+        <a href="/docs/installation" class="btn btn-primary btn-sm">Get Started</a>
+        <button class="mobile-toggle" aria-label="Toggle Navigation">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container legal-layout">
+      <!-- Header / Verification Metadata Box -->
+      <div class="meta-info-box">
+        <div class="meta-info-row">
+          <span class="meta-label">Application:</span>
+          <span class="meta-val"><strong>HERMES GSuite CLI</strong> (Python Command-Line Tool for Google Workspace)</span>
+        </div>
+        <div class="meta-info-row">
+          <span class="meta-label">Architecture:</span>
+          <span class="meta-val">Client-Side CLI (Direct Google API &amp; Gemini API communication; no intermediary server)</span>
+        </div>
+        <div class="meta-info-row">
+          <span class="meta-label">Effective Date:</span>
+          <span class="meta-val">September 27, 2026</span>
+        </div>
+        <div class="meta-info-row">
+          <span class="meta-label">Contact / Inquiries:</span>
+          <span class="meta-val"><a href="mailto:support@yourdomain.com" data-config="supportEmail">support@yourdomain.com</a></span>
+        </div>
+      </div>
+
+      <article class="docs-content">
+        <h1>HERMES GSuite CLI Privacy Policy</h1>
+        <p>
+          This Privacy Policy describes how <strong>HERMES GSuite CLI</strong> (&ldquo;HERMES&rdquo;, &ldquo;we&rdquo;, &ldquo;our&rdquo;, or &ldquo;the software&rdquo;) accesses, handles, processes, and stores user information and Google Workspace user data when you install and operate the command-line application.
+        </p>
+
+        <h2>1. What HERMES CLI Is</h2>
+        <p>
+          HERMES GSuite CLI is an open-source, client-side command-line interface written in Python and distributed via PyPI as <code>hermes-cli</code>. It enables individual developers, system administrators, and command-line users to interact with their own Google Workspace services (such as Gmail, Google Calendar, Google Sheets, Google Docs, Google Meet, Google Forms, and Google Tasks) directly from their local terminal, with optional Gemini AI-powered workflows.
+        </p>
+        <p>
+          HERMES GSuite CLI is <strong>not a software-as-a-service (SaaS) web application</strong> and does not run a central backend database, authentication proxy, or server-side data processing infrastructure. All operations are initiated locally by the user.
+        </p>
+
+        <h2>2. What Google User Data May Be Accessed</h2>
+        <p>
+          HERMES CLI only accesses Google Workspace data corresponding to the specific commands executed by the user and the OAuth 2.0 permissions explicitly granted by the user on Google's consent screen. Depending on the commands used, this may include:
+        </p>
+        <ul>
+          <li><strong>Gmail Data:</strong> Message metadata (sender, recipient, subject, timestamp), message bodies, thread identifiers, drafts, and label information when executing commands such as <code>hermes gmail list</code>, <code>hermes gmail send</code>, or <code>hermes inbox</code>.</li>
+          <li><strong>Google Calendar Data:</strong> Calendar identifiers, event titles, descriptions, start/end dates and times, attendee lists, and event recurrence rules when executing commands such as <code>hermes calendar list</code>, <code>hermes calendar today</code>, or <code>hermes calendar create-event</code>.</li>
+          <li><strong>Google Sheets Data:</strong> Spreadsheet metadata, sheet names, cell values, and ranges when running commands such as <code>hermes sheets read</code> or <code>hermes sheets write</code>.</li>
+          <li><strong>Google Docs Data:</strong> Document metadata, structural elements, and document text content when running commands such as <code>hermes docs read</code> or <code>hermes docs append</code>.</li>
+          <li><strong>Google Meet Data:</strong> Meeting space identifiers, configuration settings, and conference links when generating meeting rooms via <code>hermes meet create</code>.</li>
+          <li><strong>Google Forms Data:</strong> Form schemas, questions, and respondent submission records when running <code>hermes forms responses</code>.</li>
+          <li><strong>Google Tasks &amp; Contacts:</strong> Task lists, task items, and basic contact information when explicitly requested by corresponding service commands.</li>
+        </ul>
+
+        <h2>3. Why Google User Data Is Accessed</h2>
+        <p>
+          HERMES GSuite CLI accesses Google Workspace data solely to execute the specific, user-initiated commands entered in the terminal. Examples include displaying upcoming appointments on your terminal screen, sending an email draft composed in your local editor, reading tabular data into a local CSV format, or summarizing email messages at your direct request.
+        </p>
+        <p>
+          HERMES CLI <strong>never accesses user data in the background without explicit user command invocation</strong>, does not scrape data for commercial advertising, and does not conduct secondary analysis or marketing profiling.
+        </p>
+
+        <h2>4. How OAuth 2.0 Authorization Works</h2>
+        <p>
+          HERMES GSuite CLI integrates with Google's official OAuth 2.0 Installed/Desktop Application flow (via the official <code>google-auth-oauthlib</code> Python library):
+        </p>
+        <ol>
+          <li>When you invoke <code>hermes auth login</code>, HERMES starts a temporary local loopback webserver (on <code>localhost</code>) and launches your default web browser to Google's official consent page at <code>https://accounts.google.com/o/oauth2/auth</code>.</li>
+          <li><strong>You authenticate directly with Google.</strong> HERMES CLI never prompts for, observes, or has access to your Google password or two-factor authentication credentials.</li>
+          <li>You are presented with Google's OAuth consent screen detailing the exact scopes requested by HERMES CLI. You explicitly decide whether to grant or deny access.</li>
+          <li>Upon authorization, Google sends an authorization code to the local loopback server, which exchanges it with Google's token endpoint (<code>https://oauth2.googleapis.com/token</code>) for a short-lived access token and a refresh token.</li>
+          <li>Each user authorizes their own Google account independently. HERMES CLI does not use a shared master account.</li>
+        </ol>
+
+        <h2>5. How Access &amp; Refresh Tokens Are Handled</h2>
+        <p>
+          OAuth access tokens are short-lived credentials used to authenticate HTTPS requests directly from your machine to official Google API endpoints. When an access token expires, HERMES GSuite CLI uses the stored refresh token to request a refreshed access token directly from Google's token endpoint, without requiring you to re-authenticate manually in the browser.
+        </p>
+
+        <h2>6. Where Credentials and Tokens Are Stored</h2>
+        <p>
+          All credentials and tokens are stored <strong>strictly on the user's local file system</strong> under the user's operating system user profile:
+        </p>
+        <ul>
+          <li><strong>OAuth Tokens:</strong> Stored at <code>~/.config/gsuite-cli/token.json</code> (or <code>%USERPROFILE%\.config\gsuite-cli\token.json</code> on Windows). This file contains your issued access token, refresh token, token expiration timestamp, and granted scopes.</li>
+          <li><strong>Client Secrets / Credentials:</strong> Stored at <code>~/.config/gsuite-cli/credentials.json</code>, or loaded from user-specified environment variables (<code>HERMES_GOOGLE_CLIENT_SECRET</code>).</li>
+          <li><strong>Configuration:</strong> Stored at <code>~/.config/gsuite-cli/config.yaml</code> and optional runtime configurations at <code>~/.hermes/config.yaml</code>.</li>
+        </ul>
+        <p>
+          These files are protected by standard local operating system file permissions. User A on a multi-user machine cannot read User B's tokens or configuration unless granted administrative root privileges on that host.
+        </p>
+
+        <h2>7. How Local Cache Data Is Handled</h2>
+        <p>
+          To enhance performance and reduce redundant Google API requests, HERMES CLI utilizes a local disk cache implemented with Python's <code>diskcache</code> library:
+        </p>
+        <ul>
+          <li><strong>Cache Location:</strong> Stored strictly in <code>~/.cache/gsuite-cli/</code> (or <code>%USERPROFILE%\.cache\gsuite-cli\</code> on Windows).</li>
+          <li><strong>Cache Keys:</strong> Keys are generated using cryptographic hashes (MD5) of command parameters to maintain predictable local lookups.</li>
+          <li><strong>Expiration (TTL):</strong> Cached data expires automatically according to a configurable Time-To-Live (default: 300 seconds / 5 minutes).</li>
+          <li><strong>Purging:</strong> Users can inspect cache metrics or wipe the cache entirely at any time using <code>hermes cache stats</code> and <code>hermes cache clear</code>.</li>
+        </ul>
+
+        <h2>8. Transmission of Data to Third Parties</h2>
+        <p>
+          <strong>HERMES CLI does not operate any central server, telemetry collector, analytics tracker, or proxy service.</strong> No Google user data, credentials, tokens, or command inputs are transmitted to the maintainers of HERMES CLI or to any unrelated third-party servers.
+        </p>
+        <p>
+          Network communication occurs exclusively between your local machine and:
+        </p>
+        <ol>
+          <li><strong>Google APIs (<code>*.googleapis.com</code>):</strong> Required to perform your Google Workspace commands.</li>
+          <li><strong>Google Gemini API (<code>generativelanguage.googleapis.com</code>):</strong> Only when you explicitly use AI features, as detailed in Section 9 and Section 10 below.</li>
+        </ol>
+
+        <h2>9. How Gemini / AI Functionality Is Used</h2>
+        <p>
+          HERMES GSuite CLI integrates Google Gemini (using the official Google GenAI SDK) to provide natural-language assistance, email summarization, draft generation, and intelligent schedule queries.
+        </p>
+        <p>
+          <strong>Direct vs. AI Execution:</strong> The vast majority of HERMES commands (such as <code>hermes gmail list</code>, <code>hermes calendar list</code>, <code>hermes sheets read</code>, <code>hermes docs list</code>) are purely deterministic and communicate directly with Google Workspace APIs without any AI involvement.
+        </p>
+
+        <h2>10. Transmission of User Data to AI Services</h2>
+        <p>
+          When&mdash;and only when&mdash;a user explicitly invokes an AI-powered command (such as <code>hermes ai ask &ldquo;...&rdquo;</code>, <code>hermes ai summarize</code>, <code>hermes ai compose</code>, or <code>hermes calendar smart-create</code>):
+        </p>
+        <ul>
+          <li>The user's input prompt, along with the specific Workspace text requested to be summarized or analyzed (for example, the subject lines or body text of recent emails being summarized), is transmitted directly from the user's terminal to Google's Gemini API at <code>https://generativelanguage.googleapis.com/</code>.</li>
+          <li>Requests are authenticated using the user's own Gemini API key (supplied via the <code>GEMINI_API_KEY</code> environment variable or configured via <code>hermes config set ai.gemini_api_key</code>).</li>
+          <li>Data transmitted to Google's Gemini API is processed under <a href="https://ai.google.dev/terms" target="_blank" rel="noopener noreferrer">Google's Generative AI Terms of Service</a> and Google's Developer API policies. HERMES CLI does not save or transmit AI interaction prompts to any secondary server.</li>
+        </ul>
+
+        <h2>11. Data Retention</h2>
+        <p>
+          Because HERMES CLI does not operate an external database or backend server, the software itself retains no centralized user data. All data retained by the CLI exists solely on your local hard drive in the configuration and cache folders specified in Sections 6 and 7, subject to the local TTL and user deletion.
+        </p>
+
+        <h2>12. Data Deletion</h2>
+        <p>
+          Users maintain full control over their local data and can delete it at any time:
+        </p>
+        <ul>
+          <li><strong>To Revoke &amp; Delete Tokens:</strong> Run <code>hermes auth logout</code>. This command revokes the active token online with Google's revocation endpoint and securely unlinks/deletes <code>~/.config/gsuite-cli/token.json</code>.</li>
+          <li><strong>To Wipe Local Cache:</strong> Run <code>hermes cache clear</code> or delete the <code>~/.cache/gsuite-cli/</code> directory.</li>
+          <li><strong>To Completely Remove Application Footprint:</strong> Delete the local directories <code>~/.config/gsuite-cli</code>, <code>~/.cache/gsuite-cli</code>, and <code>~/.hermes</code>.</li>
+        </ul>
+
+        <h2>13. User Control &amp; Revocation of Google Permissions</h2>
+        <p>
+          You may revoke HERMES CLI's authorization to access your Google account at any moment through Google's centralized account security interface:
+        </p>
+        <ol>
+          <li>Navigate to <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer">Google Account &rarr; Third-party apps &amp; services</a>.</li>
+          <li>Select <strong>HERMES GSuite CLI</strong> (or the custom Desktop Client ID configured for your project).</li>
+          <li>Click <strong>Delete all connections that you have with HERMES GSuite CLI</strong>.</li>
+        </ol>
+        <p>
+          Once revoked, all outstanding access and refresh tokens are immediately invalidated by Google, preventing any further API calls from the CLI until you explicitly perform a new login flow.
+        </p>
+
+        <h2>14. Security Practices</h2>
+        <p>
+          HERMES GSuite CLI adheres to security-by-design principles:
+        </p>
+        <ul>
+          <li>All API network calls use encrypted TLS/HTTPS (port 443).</li>
+          <li>Zero secret bundling: The distributed PyPI package contains no hardcoded Google client secrets, user tokens, or proprietary API keys.</li>
+          <li>Bring Your Own Credentials (BYOC): Users control their own Google Cloud Project and OAuth Desktop client credentials.</li>
+          <li>Scopes are checked locally before API invocations to avoid unauthorized requests.</li>
+        </ul>
+
+        <h2>15. Contact Information &amp; Data Inquiries</h2>
+        <p>
+          If you have questions, feedback, or data privacy inquiries regarding HERMES CLI, please contact the maintainer:
+        </p>
+        <ul>
+          <li><strong>Project Homepage:</strong> <span data-config="domain">https://hermes-cli.yourdomain.com</span></li>
+          <li><strong>Support Email:</strong> <a href="mailto:support@yourdomain.com" data-config="supportEmail">support@yourdomain.com</a></li>
+          <li><strong>Security Reporting:</strong> <a href="mailto:security@yourdomain.com" data-config="securityEmail">security@yourdomain.com</a></li>
+          <li><strong>Issue Tracker:</strong> <a href="https://github.com/nsakthivel-dev/hermes-gsuite-cli/issues" target="_blank" rel="noopener noreferrer" data-config="githubUrl">GitHub Issues</a></li>
+        </ul>
+
+        <h2>16. Changes to this Privacy Policy</h2>
+        <p>
+          We may update this Privacy Policy periodically to reflect enhancements to HERMES CLI (such as the addition of newly supported Google Workspace APIs or modified command capabilities). Any updates will be published directly to this page with an updated &ldquo;Effective Date&rdquo;. We encourage users to review this page periodically.
+        </p>
+
+        <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle); display: flex; gap: 1.5rem; flex-wrap: wrap;">
+          <a href="/terms">&larr; Terms of Service</a>
+          <a href="/security">Security Practices &rarr;</a>
+          <a href="/docs">Documentation &rarr;</a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="brand-name">
+            <img src="../assets/images/logo.png" alt="" width="24" height="24" style="vertical-align: middle; margin-right: 6px;">
+            HERMES GSUITE <span class="brand-badge">CLI</span>
+          </div>
+          <p class="footer-desc">
+            Unified. Intelligent. Terminal-First.<br>
+            A Python-based command-line interface for Google Workspace.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Documentation</h4>
+          <ul class="footer-links">
+            <li><a href="/docs" class="footer-link">Docs Overview</a></li>
+            <li><a href="/docs/installation" class="footer-link">Installation</a></li>
+            <li><a href="/docs/authentication" class="footer-link">Authentication</a></li>
+            <li><a href="/docs/commands" class="footer-link">Commands Reference</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Trust &amp; Legal</h4>
+          <ul class="footer-links">
+            <li><a href="/privacy" class="footer-link">Privacy Policy</a></li>
+            <li><a href="/terms" class="footer-link">Terms of Service</a></li>
+            <li><a href="/security" class="footer-link">Security Overview</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Community</h4>
+          <ul class="footer-links">
+            <li><a href="/support" class="footer-link">Support &amp; Issues</a></li>
+            <li><a href="https://github.com/nsakthivel-dev/hermes-gsuite-cli" target="_blank" rel="noopener noreferrer" class="footer-link" data-config="githubUrl">GitHub Repository</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Contact</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:support@yourdomain.com" class="footer-link" data-config="supportEmail">Developer Support</a></li>
+            <li><a href="mailto:security@yourdomain.com" class="footer-link" data-config="securityEmail">Security Inquiries</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; <span data-config="copyrightYear">2026</span> HERMES GSuite CLI. Released under the MIT License.</div>
+        <div>Public Privacy Policy for Google OAuth 2.0 verification.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
+

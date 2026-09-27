@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI &amp; Gemini Workflows &mdash; HERMES GSuite CLI</title>
+  <meta name="description" content="Configure and leverage Google Gemini AI in HERMES CLI for email summarization, smart drafting, and natural-language calendar scheduling.">
+  <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/docs.css">
+  <script src="../../assets/js/config.js"></script>
+</head>
+<body>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="/" class="brand-link">
+        <img src="../../assets/images/logo.png" alt="HERMES CLI Logo" class="brand-logo" width="36" height="36">
+        <span class="brand-name">HERMES GSUITE <span class="brand-badge">CLI</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="/docs" class="nav-link active">Documentation</a></li>
+          <li><a href="/security" class="nav-link">Security</a></li>
+          <li><a href="/privacy" class="nav-link">Privacy Policy</a></li>
+          <li><a href="/terms" class="nav-link">Terms</a></li>
+          <li><a href="/support" class="nav-link">Support</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="https://github.com/nsakthivel-dev/hermes-gsuite-cli" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" data-config="githubUrl">GitHub</a>
+        <a href="/docs/installation" class="btn btn-primary btn-sm">Get Started</a>
+        <button class="mobile-toggle" aria-label="Toggle Navigation">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container docs-layout">
+      <!-- Docs Sidebar -->
+      <aside class="docs-sidebar">
+        <div class="docs-nav-group">
+          <div class="docs-nav-title">Getting Started</div>
+          <ul class="docs-nav-list">
+            <li class="docs-nav-item"><a href="/docs">Overview</a></li>
+            <li class="docs-nav-item"><a href="/docs/installation">Installation</a></li>
+            <li class="docs-nav-item"><a href="/docs/authentication">Authentication &amp; OAuth</a></li>
+          </ul>
+        </div>
+
+        <div class="docs-nav-group">
+          <div class="docs-nav-title">Command Reference</div>
+          <ul class="docs-nav-list">
+            <li class="docs-nav-item"><a href="/docs/commands">All Commands</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#gmail">Gmail</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#calendar">Calendar</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#sheets">Sheets</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#docs">Docs</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#meet">Meet</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#forms">Forms</a></li>
+          </ul>
+        </div>
+
+        <div class="docs-nav-group">
+          <div class="docs-nav-title">Advanced Features</div>
+          <ul class="docs-nav-list">
+            <li class="docs-nav-item active"><a href="/docs/ai">AI &amp; Gemini Workflows</a></li>
+            <li class="docs-nav-item"><a href="/docs/caching">Local Disk Caching</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Main Docs Content -->
+      <article class="docs-content">
+        <h1>AI &amp; Gemini Workflows</h1>
+        <p>
+          HERMES GSuite CLI includes native integration with Google Gemini (via the official <code>google-genai</code> Python SDK) to enable natural-language understanding, intelligent email summarization, draft generation, and automated schedule extraction.
+        </p>
+
+        <h2 id="privacy-boundary">Deterministic Direct Execution vs. AI Pipeline</h2>
+        <div class="callout callout-info">
+          <div class="callout-title">Explicit AI Invocation Only</div>
+          <p class="callout-text">
+            Standard HERMES commands (such as <code>hermes gmail list</code>, <code>hermes calendar today</code>, or <code>hermes sheets read</code>) execute deterministically and communicate directly with Google Workspace APIs. <strong>No data is sent to Gemini on standard commands.</strong> Gemini is only contacted when you explicitly run an <code>hermes ai</code> subcommand or provide an AI query.
+          </p>
+        </div>
+
+        <h2 id="api-key-setup">Configuring Your Gemini API Key</h2>
+        <p>To use Gemini AI features, obtain an API key from <a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer">Google AI Studio</a> and supply it using either method:</p>
+
+        <h3>Method 1: Shell Environment Variable (Recommended)</h3>
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>bash</span><button class="copy-btn" data-copy="export GEMINI_API_KEY='your-api-key-here'">Copy</button></div>
+          <pre><code># Linux & macOS
+export GEMINI_API_KEY="your-api-key-here"
+
+# Windows PowerShell
+$env:GEMINI_API_KEY = "your-api-key-here"</code></pre>
+        </div>
+
+        <h3>Method 2: Persistent Local Configuration</h3>
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>bash</span><button class="copy-btn" data-copy="hermes config set ai.gemini_api_key 'your-api-key-here'">Copy</button></div>
+          <pre><code>hermes config set ai.gemini_api_key "your-api-key-here"</code></pre>
+        </div>
+
+        <h2 id="ai-commands">AI Commands Reference</h2>
+
+        <h3>1. Ask Workspace Questions (<code>hermes ai ask</code>)</h3>
+        <p>Query your schedule, messages, or workspace context using natural English:</p>
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>bash</span><button class="copy-btn" data-copy="hermes ai ask 'What meetings do I have this afternoon?'">Copy</button></div>
+          <pre><code>$ hermes ai ask "What meetings do I have this afternoon?"</code></pre>
+        </div>
+
+        <h3>2. Summarize Email Threads (<code>hermes ai summarize</code>)</h3>
+        <p>Extract concise bulleted action points from complex email threads:</p>
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>bash</span><button class="copy-btn" data-copy="hermes ai summarize --thread <THREAD_ID>">Copy</button></div>
+          <pre><code>$ hermes ai summarize --thread 18fb9921</code></pre>
+        </div>
+
+        <h3>3. Draft Email Responses (<code>hermes ai compose</code>)</h3>
+        <p>Draft professional replies based on email thread history:</p>
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>bash</span><button class="copy-btn" data-copy="hermes ai compose --prompt 'Politely accept the meeting invitation for Thursday at 2 PM'">Copy</button></div>
+          <pre><code>$ hermes ai compose --prompt "Politely accept the meeting invitation for Thursday at 2 PM"</code></pre>
+        </div>
+
+        <h3>4. Natural Language Scheduling (<code>hermes calendar smart-create</code>)</h3>
+        <p>Convert conversational text into structured calendar events:</p>
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>bash</span><button class="copy-btn" data-copy="hermes calendar smart-create 'Lunch with Sarah next Tuesday at noon at Bistro 42'">Copy</button></div>
+          <pre><code>$ hermes calendar smart-create "Lunch with Sarah next Tuesday at noon at Bistro 42"
+✔ Event scheduled:
+  Summary: Lunch with Sarah
+  Location: Bistro 42
+  Start: 2026-10-06 12:00 UTC
+  End: 2026-10-06 13:00 UTC</code></pre>
+        </div>
+
+        <h2 id="model-selection">Model Selection &amp; Temperature</h2>
+        <p>
+          By default, HERMES CLI utilizes <code>gemini-3.6-flash</code> for optimal speed and low latency. You can customize the model name in your local config:
+        </p>
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>bash</span><button class="copy-btn" data-copy="hermes config set ai.model_name 'gemini-3.6-flash'">Copy</button></div>
+          <pre><code>hermes config set ai.model_name "gemini-3.6-flash"</code></pre>
+        </div>
+      </article>
+
+      <aside class="docs-toc">
+        <div class="toc-title">On This Page</div>
+        <ul class="toc-list">
+          <li><a href="#privacy-boundary">Deterministic vs. AI Pipeline</a></li>
+          <li><a href="#api-key-setup">API Key Setup</a></li>
+          <li><a href="#ai-commands">AI Commands Reference</a></li>
+          <li><a href="#model-selection">Model Selection</a></li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>&copy; <span data-config="copyrightYear">2026</span> HERMES GSuite CLI. Released under the MIT License.</div>
+        <div><a href="/privacy">Privacy Policy</a> &bull; <a href="/terms">Terms</a> &bull; <a href="/security">Security</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/main.js"></script>
+  <script src="../../assets/js/docs.js"></script>
+</body>
+</html>
+

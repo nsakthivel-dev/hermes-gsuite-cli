@@ -1,0 +1,21 @@
+# Netlify Redirects & Clean URL rewrites for HERMES GSuite CLI
+/privacy/             /privacy/index.html            200
+/privacy              /privacy/index.html            200
+/terms/                /terms/index.html              200
+/terms                /terms/index.html              200
+/security/             /security/index.html           200
+/security             /security/index.html           200
+/docs/                 /docs/index.html               200
+/docs                 /docs/index.html               200
+/docs/installation/   /docs/installation/index.html  200
+/docs/installation    /docs/installation/index.html  200
+/docs/authentication/ /docs/authentication/index.html 200
+/docs/authentication  /docs/authentication/index.html 200
+/docs/commands/       /docs/commands/index.html      200
+/docs/commands        /docs/commands/index.html      200
+/docs/ai/             /docs/ai/index.html            200
+/docs/ai              /docs/ai/index.html            200
+/docs/caching/        /docs/caching/index.html       200
+/docs/caching         /docs/caching/index.html       200
+/support/              /support/index.html            200
+/support              /support/index.html            200

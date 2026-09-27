@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authentication &amp; OAuth 2.0 &mdash; HERMES GSuite CLI</title>
+  <meta name="description" content="Complete guide to setting up Google Cloud OAuth 2.0 credentials, configuring scopes, authenticating, and managing local tokens in HERMES CLI.">
+  <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/docs.css">
+  <script src="../../assets/js/config.js"></script>
+</head>
+<body>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="/" class="brand-link">
+        <img src="../../assets/images/logo.png" alt="HERMES CLI Logo" class="brand-logo" width="36" height="36">
+        <span class="brand-name">HERMES GSUITE <span class="brand-badge">CLI</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="/docs" class="nav-link active">Documentation</a></li>
+          <li><a href="/security" class="nav-link">Security</a></li>
+          <li><a href="/privacy" class="nav-link">Privacy Policy</a></li>
+          <li><a href="/terms" class="nav-link">Terms</a></li>
+          <li><a href="/support" class="nav-link">Support</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="https://github.com/nsakthivel-dev/hermes-gsuite-cli" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" data-config="githubUrl">GitHub</a>
+        <a href="/docs/installation" class="btn btn-primary btn-sm">Get Started</a>
+        <button class="mobile-toggle" aria-label="Toggle Navigation">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container docs-layout">
+      <!-- Docs Sidebar -->
+      <aside class="docs-sidebar">
+        <div class="docs-nav-group">
+          <div class="docs-nav-title">Getting Started</div>
+          <ul class="docs-nav-list">
+            <li class="docs-nav-item"><a href="/docs">Overview</a></li>
+            <li class="docs-nav-item"><a href="/docs/installation">Installation</a></li>
+            <li class="docs-nav-item active"><a href="/docs/authentication">Authentication &amp; OAuth</a></li>
+          </ul>
+        </div>
+
+        <div class="docs-nav-group">
+          <div class="docs-nav-title">Command Reference</div>
+          <ul class="docs-nav-list">
+            <li class="docs-nav-item"><a href="/docs/commands">All Commands</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#gmail">Gmail</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#calendar">Calendar</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#sheets">Sheets</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#docs">Docs</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#meet">Meet</a></li>
+            <li class="docs-nav-item"><a href="/docs/commands#forms">Forms</a></li>
+          </ul>
+        </div>
+
+        <div class="docs-nav-group">
+          <div class="docs-nav-title">Advanced Features</div>
+          <ul class="docs-nav-list">
+            <li class="docs-nav-item"><a href="/docs/ai">AI &amp; Gemini Workflows</a></li>
+            <li class="docs-nav-item"><a href="/docs/caching">Local Disk Caching</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Main Docs Content -->
+      <article class="docs-content">
+        <h1>Authentication &amp; Google OAuth 2.0</h1>
+        <p>
+          HERMES GSuite CLI follows the <strong>BYOC (Bring Your Own Credentials)</strong> architecture model. Rather than routing your private data through a shared third-party app, you use Google Cloud OAuth 2.0 Desktop credentials so you retain complete ownership over API access and quotas.
+        </p>
+
+        <h2 id="google-cloud-setup">1. Google Cloud Console Setup</h2>
+        <p>To enable HERMES to communicate with your Google Workspace account:</p>
+        <ol>
+          <li>Open the <a href="https://console.cloud.google.com/" target="_blank" rel="noopener noreferrer">Google Cloud Console</a>.</li>
+          <li>Create a new project (e.g. <code>Hermes CLI Workspace</code>).</li>
+          <li>Navigate to <strong>APIs &amp; Services &rarr; Library</strong> and enable the APIs you plan to use:
+            <ul>
+              <li>Gmail API</li>
+              <li>Google Calendar API</li>
+              <li>Google Sheets API</li>
+              <li>Google Docs API</li>
+              <li>Google Meet API</li>
+              <li>Google Forms API</li>
+              <li>Google Drive API</li>
+              <li>Google Tasks API</li>
+            </ul>
+          </li>
+          <li>Navigate to <strong>APIs &amp; Services &rarr; OAuth consent screen</strong>:
+            <ul>
+              <li>Select <strong>External</strong> (or <strong>Internal</strong> for Workspace organizations).</li>
+              <li>Set Application Name to <code>HERMES CLI</code> and provide your email address.</li>
+              <li>Under <strong>Test users</strong> (if still in testing), add your personal Google account email address.</li>
+            </ul>
+          </li>
+          <li>Navigate to <strong>APIs &amp; Services &rarr; Credentials</strong>:
+            <ul>
+              <li>Click <strong>Create Credentials &rarr; OAuth client ID</strong>.</li>
+              <li>Select Application Type: <strong>Desktop app</strong>.</li>
+              <li>Name it <code>HERMES Desktop Client</code> and click <strong>Create</strong>.</li>
+              <li>Click <strong>Download JSON</strong> to save your client secrets file.</li>
+            </ul>
+          </li>
+        </ol>
+
+        <h2 id="supplying-credentials">2. Supplying Credentials to HERMES</h2>
+        <p>You can provide your client credentials in any of the following ways:</p>
+
+        <h3>Option A: Default Configuration Path (Recommended)</h3>
+        <p>Copy the downloaded credentials file to the default HERMES configuration directory:</p>
+        <ul>
+          <li><strong>Linux / macOS:</strong> <code>~/.config/gsuite-cli/credentials.json</code></li>
+          <li><strong>Windows:</strong> <code>C:\Users\&lt;username&gt;\.config\gsuite-cli\credentials.json</code></li>
+        </ul>
+
+        <h3>Option B: Environment Variables</h3>
+        <p>Pass the file path or raw secret via shell environment variables:</p>
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>bash</span><button class="copy-btn" data-copy="export HERMES_GOOGLE_CLIENT_SECRET='/path/to/credentials.json'">Copy</button></div>
+          <pre><code># Specify file path
+export HERMES_GOOGLE_CLIENT_SECRET="/path/to/downloaded-credentials.json"
+
+# Or provide paired client ID & secret
+export HERMES_GOOGLE_CLIENT_ID="your-client-id.apps.googleusercontent.com"
+export HERMES_GOOGLE_CLIENT_SECRET="your-client-secret"</code></pre>
+        </div>
+
+        <h2 id="running-login">3. Running the Login Flow</h2>
+        <p>Trigger the OAuth 2.0 authorization process in your terminal:</p>
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>bash</span><button class="copy-btn" data-copy="hermes auth login">Copy</button></div>
+          <pre><code>$ hermes auth login</code></pre>
+        </div>
+        <p>
+          HERMES launches your default web browser to Google's official accounts page. Review the requested permissions and click <strong>Allow</strong>. Once granted, Google issues an authorization token, which HERMES saves to:
+        </p>
+        <code>~/.config/gsuite-cli/token.json</code>
+
+        <div class="callout callout-info">
+          <div class="callout-title">Re-Authenticating &amp; Forcing Scope Updates</div>
+          <p class="callout-text">
+            If you ever need to re-authorize or expand granted permissions (for example, if you checked only some boxes during initial sign-in), run:
+            <br>
+            <code>hermes auth login --force</code>
+          </p>
+        </div>
+
+        <h2 id="auth-status">4. Checking Token Status</h2>
+        <p>To view your active token status, scope grants, and expiration timestamps:</p>
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>bash</span><button class="copy-btn" data-copy="hermes auth status">Copy</button></div>
+          <pre><code>$ hermes auth status
+OAuth Status: Authenticated (Valid)
+Account: user@example.com
+Token File: ~/.config/gsuite-cli/token.json
+Token Expiry: 2026-09-27 12:45:00 UTC (Auto-refreshed via refresh_token)
+Scopes:
+  - https://www.googleapis.com/auth/calendar
+  - https://www.googleapis.com/auth/gmail.modify
+  - https://www.googleapis.com/auth/spreadsheets
+  - https://www.googleapis.com/auth/documents
+  - https://www.googleapis.com/auth/meetings.space.created
+  - https://www.googleapis.com/auth/forms.body</code></pre>
+        </div>
+
+        <h2 id="logging-out">5. Logging Out &amp; Token Revocation</h2>
+        <p>To safely invalidate your authorization and delete local credentials:</p>
+        <div class="code-block-wrapper">
+          <div class="code-block-header"><span>bash</span><button class="copy-btn" data-copy="hermes auth logout">Copy</button></div>
+          <pre><code>$ hermes auth logout
+✔ Token revoked with Google accounts
+✔ Local token removed from ~/.config/gsuite-cli/token.json</code></pre>
+        </div>
+      </article>
+
+      <aside class="docs-toc">
+        <div class="toc-title">On This Page</div>
+        <ul class="toc-list">
+          <li><a href="#google-cloud-setup">1. Google Cloud Setup</a></li>
+          <li><a href="#supplying-credentials">2. Supplying Credentials</a></li>
+          <li><a href="#running-login">3. Running Login</a></li>
+          <li><a href="#auth-status">4. Checking Status</a></li>
+          <li><a href="#logging-out">5. Logging Out</a></li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>&copy; <span data-config="copyrightYear">2026</span> HERMES GSuite CLI. Released under the MIT License.</div>
+        <div><a href="/privacy">Privacy Policy</a> &bull; <a href="/terms">Terms</a> &bull; <a href="/security">Security</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/main.js"></script>
+  <script src="../../assets/js/docs.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support &amp; Community &mdash; HERMES GSuite CLI</title>
+  <meta name="description" content="Support channels, issue reporting, troubleshooting guides, and security disclosure for HERMES GSuite CLI.">
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/docs.css">
+  <script src="../assets/js/config.js"></script>
+</head>
+<body>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="/" class="brand-link">
+        <img src="../assets/images/logo.png" alt="HERMES CLI Logo" class="brand-logo" width="36" height="36">
+        <span class="brand-name">HERMES GSUITE <span class="brand-badge">CLI</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="/docs" class="nav-link">Documentation</a></li>
+          <li><a href="/security" class="nav-link">Security</a></li>
+          <li><a href="/privacy" class="nav-link">Privacy Policy</a></li>
+          <li><a href="/terms" class="nav-link">Terms</a></li>
+          <li><a href="/support" class="nav-link active">Support</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="https://github.com/nsakthivel-dev/hermes-gsuite-cli" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" data-config="githubUrl">GitHub</a>
+        <a href="/docs/installation" class="btn btn-primary btn-sm">Get Started</a>
+        <button class="mobile-toggle" aria-label="Toggle Navigation">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container legal-layout">
+      <article class="docs-content">
+        <h1>Support &amp; Contact</h1>
+        <p>
+          Need assistance with HERMES GSuite CLI, encountered a bug, or have questions about Google OAuth 2.0 verification? Here are the official support channels.
+        </p>
+
+        <div class="grid-2" style="margin: 2.5rem 0;">
+          <div class="card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+              </svg>
+            </div>
+            <h3 class="card-title">GitHub Issue Tracker</h3>
+            <p class="card-text">
+              For bug reports, feature suggestions, or documentation corrections, open an issue on our GitHub repository.
+            </p>
+            <div style="margin-top: 1rem;">
+              <a href="https://github.com/nsakthivel-dev/hermes-gsuite-cli/issues" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" data-config="githubUrl">Open GitHub Issue &rarr;</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </div>
+            <h3 class="card-title">Developer Contact Email</h3>
+            <p class="card-text">
+              For direct inquiries regarding the HERMES CLI project, licensing, or verification questions:
+            </p>
+            <div style="margin-top: 1rem;">
+              <a href="mailto:support@yourdomain.com" class="btn btn-secondary btn-sm" data-config="supportEmail">Email: support@yourdomain.com</a>
+            </div>
+          </div>
+        </div>
+
+        <h2>Security &amp; Vulnerability Disclosure</h2>
+        <p>
+          If you have discovered a security vulnerability or sensitive token disclosure in HERMES CLI, please do NOT file a public issue on GitHub. Instead, report it confidentially to our security contact:
+        </p>
+        <p>
+          <strong>Security Inquiries:</strong> <a href="mailto:security@yourdomain.com" data-config="securityEmail">security@yourdomain.com</a>
+        </p>
+
+        <h2>Common Troubleshooting Scenarios</h2>
+        <div class="card" style="margin-bottom: 1.5rem;">
+          <h4 style="color: #ffffff; margin-bottom: 0.5rem;">&ldquo;OAuth client configuration not found&rdquo;</h4>
+          <p class="card-text">
+            Ensure your <code>credentials.json</code> file is placed in <code>~/.config/gsuite-cli/credentials.json</code>, or export the environment variable <code>HERMES_GOOGLE_CLIENT_SECRET=/path/to/credentials.json</code>.
+          </p>
+        </div>
+
+        <div class="card" style="margin-bottom: 1.5rem;">
+          <h4 style="color: #ffffff; margin-bottom: 0.5rem;">&ldquo;Access blocked: This app has not been verified&rdquo;</h4>
+          <p class="card-text">
+            If your Google Cloud OAuth consent screen is in <strong>Testing</strong> status, make sure your Google account email is added under <strong>Test users</strong> in Google Cloud Console. Once verified by Google, any user can authenticate without warning.
+          </p>
+        </div>
+
+        <div class="card" style="margin-bottom: 2.5rem;">
+          <h4 style="color: #ffffff; margin-bottom: 0.5rem;">&ldquo;Permission denied (403) / Insufficient Scopes&rdquo;</h4>
+          <p class="card-text">
+            Run <code>hermes auth login --force</code> to initiate a fresh OAuth 2.0 flow and ensure all necessary permission checkboxes are checked on Google's consent screen.
+          </p>
+        </div>
+
+        <div style="padding-top: 1.5rem; border-top: 1px solid var(--border-subtle); display: flex; gap: 1.5rem; flex-wrap: wrap;">
+          <a href="/docs">&larr; Return to Documentation</a>
+          <a href="/privacy">Privacy Policy &rarr;</a>
+          <a href="/security">Security Model &rarr;</a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="brand-name">
+            <img src="../assets/images/logo.png" alt="" width="24" height="24" style="vertical-align: middle; margin-right: 6px;">
+            HERMES GSUITE <span class="brand-badge">CLI</span>
+          </div>
+          <p class="footer-desc">
+            Unified. Intelligent. Terminal-First.<br>
+            A Python-based command-line interface for Google Workspace.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Documentation</h4>
+          <ul class="footer-links">
+            <li><a href="/docs" class="footer-link">Docs Overview</a></li>
+            <li><a href="/docs/installation" class="footer-link">Installation</a></li>
+            <li><a href="/docs/authentication" class="footer-link">Authentication</a></li>
+            <li><a href="/docs/commands" class="footer-link">Commands Reference</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Trust &amp; Legal</h4>
+          <ul class="footer-links">
+            <li><a href="/privacy" class="footer-link">Privacy Policy</a></li>
+            <li><a href="/terms" class="footer-link">Terms of Service</a></li>
+            <li><a href="/security" class="footer-link">Security Overview</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Community</h4>
+          <ul class="footer-links">
+            <li><a href="/support" class="footer-link">Support &amp; Issues</a></li>
+            <li><a href="https://github.com/nsakthivel-dev/hermes-gsuite-cli" target="_blank" rel="noopener noreferrer" class="footer-link" data-config="githubUrl">GitHub Repository</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Contact</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:support@yourdomain.com" class="footer-link" data-config="supportEmail">Developer Support</a></li>
+            <li><a href="mailto:security@yourdomain.com" class="footer-link" data-config="securityEmail">Security Inquiries</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; <span data-config="copyrightYear">2026</span> HERMES GSuite CLI. Released under the MIT License.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
+

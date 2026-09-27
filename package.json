@@ -1,0 +1,12 @@
+{
+  "name": "hermes-gsuite-cli-website",
+  "version": "1.0.0",
+  "description": "Official public website for HERMES GSuite CLI",
+  "scripts": {
+    "build": "python3 build.py || python build.py",
+    "start": "python serve.py 3000"
+  },
+  "keywords": ["hermes", "gsuite", "cli", "google-workspace"],
+  "author": "HERMES CLI Contributors",
+  "license": "MIT"
+}
