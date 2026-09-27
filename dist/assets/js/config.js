@@ -6,11 +6,8 @@
  * your public GitHub repository, and contact email.
  */
 window.HERMES_CONFIG = {
-  // Production domain verified in Google Search Console (e.g., 'https://hermes-cli.dev' or 'https://hermes.example.com')
-  // Replace this placeholder with your verified domain
-  domain: window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')
-    ? window.location.origin
-    : (window.location.origin || 'https://hermes-cli.yourdomain.com'),
+  // Production domain
+  domain: 'https://hermes-gsuite-cli.vercel.app',
   
   // Application details matching Google Cloud OAuth Consent Screen
   appName: 'HERMES GSuite CLI',
@@ -21,9 +18,9 @@ window.HERMES_CONFIG = {
   githubUrl: 'https://github.com/nsakthivel-dev/hermes-gsuite-cli',
   pypiUrl: 'https://pypi.org/project/hermes-cli/',
   
-  // Contact & Security Reporting (Placeholder to be configured with owner's real verified address)
-  supportEmail: 'support@yourdomain.com',
-  securityEmail: 'security@yourdomain.com',
+  // Contact & Security Reporting
+  supportEmail: 'sakthicud07@gmail.com',
+  securityEmail: 'sakthicud07@gmail.com',
   
   // Release year
   copyrightYear: 2026
